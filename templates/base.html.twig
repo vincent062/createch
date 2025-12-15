@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Createch WA - Développeur Web à Vimy{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>💻</text></svg>">
+        
+        {# Tailwind CSS via CDN (Pour le dév rapide) #}
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            brand: {
+                                orange: '#ff7f50', // Ton Orange
+                                dark: '#1a202c',
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen">
+        
+        {# --- NAVBAR --- #}
+        <nav class="bg-white shadow-md fixed w-full z-50 top-0">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-20">
+                    {# Logo #}
+                    <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.location.href='/'">
+                        <span class="text-3xl font-extrabold text-slate-900 tracking-tighter">CREATECH</span>
+                        <span class="text-3xl font-extrabold text-brand-orange ml-1">WA</span>
+                    </div>
+
+                    {# Menu Desktop #}
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="/" class="text-slate-600 hover:text-brand-orange font-medium transition">Accueil</a>
+                        <a href="#services" class="text-slate-600 hover:text-brand-orange font-medium transition">Services</a>
+                        <a href="#expertise" class="text-slate-600 hover:text-brand-orange font-medium transition">Expertise</a>
+                        <a href="#contact" class="bg-brand-orange text-white px-6 py-2.5 rounded-full font-bold hover:bg-orange-600 transition shadow-lg transform hover:-translate-y-0.5">
+                            Demander un devis
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        {# --- CONTENU DE LA PAGE --- #}
+        <main class="flex-grow pt-20">
+            {% block body %}{% endblock %}
+        </main>
+
+        {# --- FOOTER --- #}
+        <footer class="bg-slate-900 text-white py-8 mt-12">
+            <div class="max-w-7xl mx-auto px-4 text-center">
+                <p class="font-bold text-xl mb-2">CREATECH <span class="text-brand-orange">WA</span></p>
+                <p class="text-slate-400 text-sm">Conception & Développement d'Applications à Vimy (62).</p>
+                <p class="text-slate-500 text-xs mt-4">© {{ 'now'|date('Y') }} Vincent Kazmierczak. Tous droits réservés.</p>
+            </div>
+        </footer>
+
+    </body>
+</html>
