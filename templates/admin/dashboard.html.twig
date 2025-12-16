@@ -1,0 +1,45 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block title %}Admin - Crea'Tech{% endblock %}
+
+{# On lie le fichier CSS externe ici #}
+{% block head_stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+{% endblock %}
+
+{% block content %}
+    
+    <div class="dashboard-container">
+        
+        <h1 class="dashboard-title">👋 Bienvenue sur Crea'Tech</h1>
+        <p class="dashboard-subtitle">
+            Ceci est votre espace de pilotage. Vous avez le contrôle total sur le contenu du site.
+        </p>
+
+        <hr class="dashboard-divider">
+
+        <h3 class="dashboard-actions-title">Que souhaitez-vous faire ?</h3>
+        
+        <ul class="dashboard-list">
+            <li>
+                <strong>🛠 Gérer les Prestations</strong> 
+                Ajoutez ou modifiez vos offres (Site Vitrine, SEO, etc.).
+            </li>
+            <li>
+                <strong>💻 Mettre à jour le Portfolio</strong> 
+                Ajoutez vos dernières réalisations pour impressionner vos clients.
+            </li>
+            <li>
+                <strong>📬 Lire les Messages</strong> 
+                Consultez les demandes de devis reçues via le site.
+            </li>
+        </ul>
+
+        <div class="dashboard-tip">
+            💡 Astuce : Utilisez le menu noir sur la gauche pour naviguer entre les rubriques.
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+/* public/css/admin.css */
+
+/* --- LE PARENT (Le Conteneur Principal) --- */
+.dashboard-container {
+    max-width: 900px;
+    margin: 40px auto; /* Centré horizontalement */
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08); /* Ombre douce */
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* --- LES ENFANTS (Titres et Textes) --- */
+.dashboard-title {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.dashboard-subtitle {
+    font-size: 1.1rem;
+    color: #7f8c8d;
+    margin-bottom: 30px;
+}
+
+/* La ligne de séparation */
+.dashboard-divider {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0)
+    );
+    margin: 30px 0;
+}
+
+/* --- LA LISTE DES ACTIONS --- */
+.dashboard-actions-title {
+    margin-bottom: 20px;
+    color: #34495e;
+}
+
+.dashboard-list {
+    list-style: none;
+    padding: 0;
+}
+
+.dashboard-list li {
+    background-color: #f8f9fa;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-left: 4px solid #007bff; /* Barre bleue à gauche */
+    border-radius: 4px;
+    transition: transform 0.2s ease;
+}
+
+.dashboard-list li:hover {
+    transform: translateX(5px); /* Petit mouvement au survol */
+}
+
+.dashboard-list strong {
+    color: #007bff;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* --- LE MESSAGE D'ASTUCE (En bas) --- */
+.dashboard-tip {
+    margin-top: 40px;
+    padding: 15px;
+    background-color: #e3f2fd; /* Bleu très clair */
+    color: #0d47a1;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-align: center;
+}
