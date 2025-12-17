@@ -1,22 +1,76 @@
 /* Fichier : public/css/home.css */
+/* --- NAVIGATION --- */
+.navbar {
+    background-color: white;
+    padding: 15px 40px;
+    display: flex; /* Met les éléments côte à côte */
+    justify-content: space-between; /* Ecarte le logo et les liens */
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Petite ombre légère */
+    position: sticky; /* Le menu reste en haut si on scrolle */
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #555;
+    margin-left: 25px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #3498db; /* Devient bleu au survol */
+}
+
+.btn-admin {
+    background-color: #2c3e50;
+    color: white !important;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.btn-admin:hover {
+    background-color: #34495e;
+}
+
+/* ... Le reste de ton CSS (body, hero-section, etc.) reste en dessous ... */
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: white; /* Retour au fond blanc standard */
+}
 
 .hero-section {
-    background-color: #2c3e50;
+    background-color: #2c3e50; /* Le bleu foncé d'origine */
     color: white;
     text-align: center;
     padding: 60px 20px;
     margin-bottom: 40px;
 }
+
 .container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 20px 40px;
 }
+
 .grid-services {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
 }
+
 .service-card {
     border: 1px solid #eee;
     border-radius: 12px;
@@ -25,21 +79,25 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease;
 }
+
 .service-card:hover {
     transform: translateY(-5px);
     border-color: #3498db;
 }
+
 .service-title {
     color: #2c3e50;
     font-size: 1.4rem;
     margin-bottom: 10px;
     font-weight: bold;
 }
+
 .service-desc {
     color: #666;
     line-height: 1.6;
     font-size: 0.95rem;
 }
+
 .btn-details {
     display: inline-block;
     margin-top: 20px;

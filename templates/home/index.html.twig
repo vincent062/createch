@@ -2,11 +2,9 @@
 
 {% block title %}Accueil - Crea'Tech{% endblock %}
 
-{# On ajoute notre fichier CSS spécifique ici #}
+{# On connecte le fichier CSS qu'on vient de remplir #}
 {% block stylesheets %}
-    {# On garde les styles de base s'il y en a #}
     {{ parent() }} 
-    {# On ajoute notre fichier home.css #}
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 {% endblock %}
 
@@ -21,7 +19,6 @@
     <h2 style="text-align: center; margin-bottom: 40px; color: #333;">Nos Expertises</h2>
 
     <div class="grid-services">
-        
         {% for prestation in prestations %}
             <div class="service-card">
                 <h3 class="service-title">{{ prestation.titre }}</h3>
@@ -29,9 +26,8 @@
                 <a href="#" class="btn-details">En savoir plus →</a>
             </div>
         {% else %}
-            <p style="text-align: center;">Aucun service n'est disponible pour le moment.</p>
+            <p style="text-align: center;">Aucun service n'est disponible.</p>
         {% endfor %}
-
     </div>
 </div>
 
