@@ -2,33 +2,60 @@
 
 {% block title %}Accueil - Crea'Tech{% endblock %}
 
-{# On connecte le fichier CSS qu'on vient de remplir #}
-{% block stylesheets %}
-    {{ parent() }} 
-    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-{% endblock %}
-
 {% block body %}
 
-<div class="hero-section">
-    <h1>Bienvenue chez Crea'Tech 🚀</h1>
-    <p style="font-size: 1.2rem; margin-top: 10px;">Votre partenaire digital.</p>
-</div>
-
-<div class="container">
-    <h2 style="text-align: center; margin-bottom: 40px; color: #333;">Nos Expertises</h2>
-
-    <div class="grid-services">
-        {% for prestation in prestations %}
-            <div class="service-card">
-                <h3 class="service-title">{{ prestation.titre }}</h3>
-                <p class="service-desc">{{ prestation.descriptionCourte }}</p>
-                <a href="#" class="btn-details">En savoir plus →</a>
+    {# 1. HERO SECTION (Votre design Tailwind) #}
+    <div class="hero min-h-[70vh] bg-base-200">
+        <div class="hero-content text-center">
+            <div class="max-w-3xl">
+                <h1 class="text-5xl md:text-7xl font-black mb-8 text-base-content">
+                    Propulsez votre <br>
+                    <span class="text-primary bg-clip-text">présence digitale.</span>
+                </h1>
+                <p class="py-6 text-xl text-base-content/70">
+                    Bienvenue chez Créa'Tech. Nous ne nous contentons pas de coder, nous concevons des écosystèmes web performants, esthétiques et sur-mesure pour votre entreprise.
+                </p>
+                <div class="flex flex-col md:flex-row justify-center gap-4 mt-6">
+                    <a href="{{ path('app_contact') }}" class="btn btn-primary btn-wide shadow-lg shadow-primary/30">Démarrer un projet</a>
+                    <a href="#services" class="btn btn-outline btn-wide">Découvrir nos offres</a>
+                </div>
             </div>
-        {% else %}
-            <p style="text-align: center;">Aucun service n'est disponible.</p>
-        {% endfor %}
+        </div>
     </div>
-</div>
+
+    {# 2. SERVICES SECTION (Dynamique avec vos données !) #}
+    <section id="services" class="py-20 bg-base-100 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Nos Expertises</h2>
+                <p class="text-gray-500">Tout ce dont vous avez besoin pour réussir en ligne.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                {# On boucle sur les prestations de la base de données #}
+                {% for prestation in prestations %}
+                    <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition duration-300 border border-base-300">
+                        <div class="card-body">
+                            <h2 class="card-title text-primary">{{ prestation.titre }}</h2>
+                            <p class="mb-4">{{ prestation.descriptionCourte }}</p>
+                            
+                            <div class="card-actions justify-end">
+                                <a href="{{ path('app_prestation_show', {slug: prestation.slug}) }}" class="btn btn-sm btn-ghost text-secondary">
+                                    En savoir plus →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    {# S'il n'y a pas encore de services #}
+                    <div class="col-span-3 text-center py-10">
+                        <p class="text-lg">Aucun service disponible pour le moment.</p>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
 
 {% endblock %}

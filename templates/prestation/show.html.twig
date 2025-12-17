@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ prestation.titre }} - Crea'Tech{% endblock %}
+
+{% block body %}
+<div class="min-h-screen bg-base-200 py-10 px-4">
+    <div class="max-w-4xl mx-auto">
+        
+        {# Fil d'ariane / Bouton retour #}
+        <a href="{{ path('app_home') }}" class="btn btn-ghost mb-6">
+            ← Retour à l'accueil
+        </a>
+
+        <div class="card bg-base-100 shadow-xl overflow-hidden">
+            
+            {# Image d'en-tête (si tu en as une, sinon un placeholder coloré) #}
+            {% if prestation.image %}
+                <figure class="h-64 w-full">
+                    <img src="{{ asset('uploads/prestations/' ~ prestation.image) }}" alt="{{ prestation.titre }}" class="w-full h-full object-cover" />
+                </figure>
+            {% else %}
+                <div class="h-48 w-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">
+                    <span class="text-4xl text-primary-content font-bold">{{ prestation.titre|slice(0,1) }}</span>
+                </div>
+            {% endif %}
+
+            <div class="card-body p-8 md:p-12">
+                <h1 class="text-4xl font-bold mb-4 text-primary">{{ prestation.titre }}</h1>
+                
+                {# Description courte en exergue #}
+                <p class="text-xl font-medium text-base-content/80 mb-8 italic border-l-4 border-secondary pl-4">
+                    {{ prestation.descriptionCourte }}
+                </p>
+
+                <div class="divider"></div>
+
+                {# Contenu riche (si tu utilises du HTML dans ton contenu, utilise le filtre raw) #}
+                <div class="prose max-w-none prose-lg">
+                    {# nl2br permet de garder les sauts de ligne si c'est du texte brut #}
+                    {{ prestation.contenu|nl2br }}
+                </div>
+
+                <div class="card-actions justify-end mt-10">
+                    <button class="btn btn-primary btn-wide">Demander un devis pour ce service</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

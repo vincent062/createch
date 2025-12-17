@@ -1,45 +1,86 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
 
-{% block title %}Admin - Crea'Tech{% endblock %}
+{% block title %}Admin - Créa'Tech{% endblock %}
 
-{# On lie le fichier CSS externe ici #}
 {% block head_stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    {# 1. Import de DaisyUI (Styles) #}
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block head_javascript %}
+    {{ parent() }}
+    {# 2. Import de Tailwind + Configuration pour ne pas casser EasyAdmin #}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            // Important : on désactive le 'preflight' pour ne pas casser le style Bootstrap d'EasyAdmin
+            corePlugins: {
+                preflight: false,
+            }
+        }
+    </script>
 {% endblock %}
 
 {% block content %}
-    
-    <div class="dashboard-container">
+    {# 3. Conteneur principal avec le thème Halloween #}
+    <div data-theme="halloween" class="min-h-[80vh] p-8 rounded-xl bg-base-100 shadow-xl border border-base-300 font-sans">
         
-        <h1 class="dashboard-title">👋 Bienvenue sur Crea'Tech</h1>
-        <p class="dashboard-subtitle">
-            Ceci est votre espace de pilotage. Vous avez le contrôle total sur le contenu du site.
-        </p>
+        {# En-tête avec Logo et Bienvenue #}
+        <div class="flex flex-col items-center mb-10 text-center">
+            <div class="avatar mb-4">
+                <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 shadow-lg">
+                    <img src="{{ asset('img/logo.jpeg') }}" alt="Logo Crea'Tech" />
+                </div>
+            </div>
+            <h1 class="text-4xl font-bold text-primary mb-2">Bienvenue sur Crea'Tech 👋</h1>
+            <p class="text-base-content/70 max-w-2xl text-lg">
+                C'est ici que tout se passe. Pilotez votre site web, gérez vos services et répondez à vos clients depuis cette interface.
+            </p>
+        </div>
 
-        <hr class="dashboard-divider">
+        <div class="divider text-primary font-bold">ACTIONS RAPIDES</div>
 
-        <h3 class="dashboard-actions-title">Que souhaitez-vous faire ?</h3>
-        
-        <ul class="dashboard-list">
-            <li>
-                <strong>🛠 Gérer les Prestations</strong> 
-                Ajoutez ou modifiez vos offres (Site Vitrine, SEO, etc.).
-            </li>
-            <li>
-                <strong>💻 Mettre à jour le Portfolio</strong> 
-                Ajoutez vos dernières réalisations pour impressionner vos clients.
-            </li>
-            <li>
-                <strong>📬 Lire les Messages</strong> 
-                Consultez les demandes de devis reçues via le site.
-            </li>
-        </ul>
+        {# Grille des cartes (Grid Tailwind) #}
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            
+            {# Carte 1 : Prestations #}
+            <a href="{{ ea_url().setController('App\\Controller\\Admin\\PrestationCrudController') }}" 
+               class="card bg-base-200 hover:bg-base-300 transition-all hover:scale-105 duration-300 border border-base-300 shadow-md group !no-underline">
+                <div class="card-body items-center text-center">
+                    <div class="text-5xl mb-2 group-hover:animate-bounce">🛠</div>
+                    <h2 class="card-title text-secondary">Gérer les Prestations</h2>
+                    <p class="text-sm text-base-content/80">Ajoutez ou modifiez vos offres de services.</p>
+                </div>
+            </a>
 
-        <div class="dashboard-tip">
-            💡 Astuce : Utilisez le menu noir sur la gauche pour naviguer entre les rubriques.
+            {# Carte 2 : Portfolio #}
+            <a href="{{ ea_url().setController('App\\Controller\\Admin\\RealisationCrudController') }}" 
+               class="card bg-base-200 hover:bg-base-300 transition-all hover:scale-105 duration-300 border border-base-300 shadow-md group !no-underline">
+                <div class="card-body items-center text-center">
+                    <div class="text-5xl mb-2 group-hover:animate-bounce">💻</div>
+                    <h2 class="card-title text-secondary">Mettre à jour le Portfolio</h2>
+                    <p class="text-sm text-base-content/80">Montrez vos dernières réalisations.</p>
+                </div>
+            </a>
+
+            {# Carte 3 : Messages #}
+            <a href="{{ ea_url().setController('App\\Controller\\Admin\\ContactCrudController') }}" 
+               class="card bg-base-200 hover:bg-base-300 transition-all hover:scale-105 duration-300 border border-base-300 shadow-md group !no-underline">
+                <div class="card-body items-center text-center">
+                    <div class="text-5xl mb-2 group-hover:animate-bounce">📬</div>
+                    <h2 class="card-title text-secondary">Lire les Messages</h2>
+                    <p class="text-sm text-base-content/80">Consultez les demandes de devis.</p>
+                </div>
+            </a>
+
+        </div>
+
+        {# Message d'info en bas #}
+        <div role="alert" class="alert alert-info mt-12 shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>Note : Le menu latéral noir (EasyAdmin) reste disponible à gauche pour naviguer dans toutes les rubriques.</span>
         </div>
 
     </div>
-
 {% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contactez-nous - Crea'Tech{% endblock %}
+
+{% block body %}
+<div class="min-h-screen bg-base-200 py-12 px-4">
+    <div class="max-w-2xl mx-auto">
+
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-primary mb-4">Contactez-nous 📬</h1>
+            <p class="text-lg text-base-content/70">Un projet ? Une question ? Remplissez ce formulaire et nous vous répondrons sous 24h.</p>
+        </div>
+
+        {# Affichage du message de succès #}
+        {% for message in app.flashes('success') %}
+            <div role="alert" class="alert alert-success mb-6 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>{{ message }}</span>
+            </div>
+        {% endfor %}
+
+        <div class="card bg-base-100 shadow-xl border border-base-300">
+            <div class="card-body">
+                {{ form_start(form) }}
+                
+                <div class="form-control w-full mb-4">
+                    <label class="label"><span class="label-text font-bold">Votre nom</span></label>
+                    {{ form_widget(form.nom) }}
+                    <div class="text-error text-sm mt-1">{{ form_errors(form.nom) }}</div>
+                </div>
+
+                <div class="form-control w-full mb-4">
+                    <label class="label"><span class="label-text font-bold">Votre email</span></label>
+                    {{ form_widget(form.email) }}
+                    <div class="text-error text-sm mt-1">{{ form_errors(form.email) }}</div>
+                </div>
+
+                <div class="form-control w-full mb-4">
+                    <label class="label"><span class="label-text font-bold">Sujet</span></label>
+                    {{ form_widget(form.sujet) }}
+                    <div class="text-error text-sm mt-1">{{ form_errors(form.sujet) }}</div>
+                </div>
+
+                <div class="form-control w-full mb-6">
+                    <label class="label"><span class="label-text font-bold">Votre message</span></label>
+                    {{ form_widget(form.message) }}
+                    <div class="text-error text-sm mt-1">{{ form_errors(form.message) }}</div>
+                </div>
+
+                <div class="card-actions justify-end">
+                    <button type="submit" class="btn btn-primary btn-wide">Envoyer le message 🚀</button>
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

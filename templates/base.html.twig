@@ -3,106 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créa'Tech - Partenaire Digital</title>
+    <title>{% block title %}Créa'Tech - Partenaire Digital{% endblock %}</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
-    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
         body { font-family: 'Inter', sans-serif; }
     </style>
+    
+    {% block stylesheets %}{% endblock %}
 </head>
 <body class="flex flex-col min-h-screen">
 
+    {# --- BARRE DE NAVIGATION --- #}
     <div class="navbar bg-base-100 shadow-sm fixed top-0 z-50 px-4 md:px-8">
         <div class="navbar-start">
             <div class="dropdown">
                 <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                 </div>
+                {# Menu Mobile #}
                 <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#services">Nos Services</a></li>
+                    <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                    <li><a href="{{ path('app_home') }}#services">Nos Services</a></li>
+                    <li><a href="{{ path('app_contact') }}">Contact</a></li>
                 </ul>
             </div>
-            <a href="#" class="btn btn-ghost text-xl font-bold tracking-tight text-primary">
-                Créa'Tech <span class="text-secondary"></span>
+            
+            {# Logo + Nom de l'agence #}
+            <a href="{{ path('app_home') }}" class="btn btn-ghost text-xl font-bold tracking-tight text-primary flex items-center">
+                <img src="{{ asset('img/logo.jpeg') }}" alt="Logo" class="h-8 w-8 mr-2 rounded-full object-cover">
+                Créa'Tech
             </a>
         </div>
         
         <div class="navbar-center hidden lg:flex">
+            {# Menu Bureau #}
             <ul class="menu menu-horizontal px-1 font-medium">
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#services">Nos Services</a></li>
+                <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                <li><a href="{{ path('app_home') }}#services">Nos Services</a></li>
+                <li><a href="{{ path('app_contact') }}">Contact</a></li>
             </ul>
         </div>
         
         <div class="navbar-end">
-            <a href="#" class="btn btn-primary btn-sm md:btn-md">Espace Admin</a>
+            {# Bouton Admin qui fonctionne ! #}
+            {% if app.user %}
+                <a href="{{ path('admin') }}" class="btn btn-secondary btn-sm md:btn-md">Mon Espace Admin</a>
+            {% else %}
+                <a href="{{ path('app_login') }}" class="btn btn-primary btn-sm md:btn-md">Se connecter</a>
+            {% endif %}
         </div>
     </div>
 
-    <div class="hero min-h-screen bg-base-200 pt-16">
-        <div class="hero-content text-center">
-            <div class="max-w-3xl">
-                <h1 class="text-5xl md:text-7xl font-black mb-8 text-base-content">
-                    Propulsez votre <br>
-                    <span class="text-primary bg-clip-text">présence digitale.</span>
-                </h1>
-                <p class="py-6 text-xl text-base-content/70">
-                    Bienvenue chez Créa'Tech. Nous ne nous contentons pas de coder, nous concevons des écosystèmes web performants, esthétiques et sur-mesure pour votre entreprise.
-                </p>
-                <div class="flex flex-col md:flex-row justify-center gap-4 mt-6">
-                    <button class="btn btn-primary btn-wide shadow-lg shadow-primary/30">Démarrer un projet</button>
-                    <button class="btn btn-outline btn-wide">Découvrir nos offres</button>
-                </div>
-            </div>
-        </div>
+    {# --- CONTENU DE LA PAGE --- #}
+    <div class="pt-16 flex-grow">
+        {% block body %}{% endblock %}
     </div>
 
-    <section id="services" class="py-20 bg-base-100 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">Nos Expertises</h2>
-                <p class="text-gray-500">Tout ce dont vous avez besoin pour réussir en ligne.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition duration-300 border border-base-300">
-                    <div class="card-body">
-                        <h2 class="card-title text-primary">Développement Web</h2>
-                        <p>Sites vitrines, e-commerce ou applications complexes. Code propre et performant.</p>
-                    </div>
-                </div>
-                <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition duration-300 border border-base-300">
-                    <div class="card-body">
-                        <h2 class="card-title text-primary">UI/UX Design</h2>
-                        <p>Des interfaces intuitives et modernes centrées sur l'expérience utilisateur.</p>
-                    </div>
-                </div>
-                <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition duration-300 border border-base-300">
-                    <div class="card-body">
-                        <h2 class="card-title text-primary">SEO & Marketing</h2>
-                        <p>Optimisation pour les moteurs de recherche pour vous rendre visible.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    {# --- FOOTER --- #}
     <footer class="footer p-10 bg-neutral text-neutral-content mt-auto">
         <aside>
-            <span class="text-3xl"></span>
-            <p class="font-bold text-lg">Créa'Tech-Web Agence</p>
+            <img src="{{ asset('img/logo.jpeg') }}" alt="Logo" class="h-12 w-12 rounded-full object-cover mb-2">
+            <p class="font-bold text-lg">Créa'Tech - Web Agence</p>
             <p>Concepteur Développeur d'Applications<br/>© 2025 - Tous droits réservés</p>
         </aside> 
         <nav>
             <h6 class="footer-title">Navigation</h6> 
-            <a class="link link-hover">Accueil</a>
-            <a class="link link-hover">Services</a>
-            <a class="link link-hover">Admin</a>
+            <a href="{{ path('app_home') }}" class="link link-hover">Accueil</a>
+            <a href="{{ path('app_contact') }}" class="link link-hover">Contact</a>
+            <a href="{{ path('admin') }}" class="link link-hover">Administration</a>
         </nav> 
         <nav>
             <h6 class="footer-title">Légal</h6> 
@@ -111,5 +83,6 @@
         </nav>
     </footer>
 
+    {% block javascripts %}{% endblock %}
 </body>
 </html>
