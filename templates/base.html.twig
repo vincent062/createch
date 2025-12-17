@@ -33,8 +33,13 @@
             </div>
             
             {# Logo + Nom de l'agence #}
-            <a href="{{ path('app_home') }}" class="btn btn-ghost text-xl font-bold tracking-tight text-primary flex items-center">
-                <img src="{{ asset('img/logo.jpeg') }}" alt="Logo" class="h-8 w-8 mr-2 rounded-full object-cover">
+            <a href="{{ path('app_home') }}" class="btn btn-ghost text-xl font-bold tracking-tight text-primary flex items-center gap-3">
+                {# MODIFICATION ICI : Ajout du cercle (ring) autour du logo #}
+                <div class="avatar">
+                    <div class="w-9 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                        <img src="{{ asset('img/logo.jpeg') }}" alt="Logo" />
+                    </div>
+                </div>
                 Créa'Tech
             </a>
         </div>
@@ -49,7 +54,7 @@
         </div>
         
         <div class="navbar-end">
-            {# Bouton Admin qui fonctionne ! #}
+            {# Bouton Admin #}
             {% if app.user %}
                 <a href="{{ path('admin') }}" class="btn btn-secondary btn-sm md:btn-md">Mon Espace Admin</a>
             {% else %}
@@ -66,7 +71,12 @@
     {# --- FOOTER --- #}
     <footer class="footer p-10 bg-neutral text-neutral-content mt-auto">
         <aside>
-            <img src="{{ asset('img/logo.jpeg') }}" alt="Logo" class="h-12 w-12 rounded-full object-cover mb-2">
+            {# MODIFICATION ICI : Logo plus grand avec le cercle #}
+            <div class="avatar mb-2">
+                <div class="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                    <img src="{{ asset('img/logo.jpeg') }}" alt="Logo" />
+                </div>
+            </div>
             <p class="font-bold text-lg">Créa'Tech - Web Agence</p>
             <p>Concepteur Développeur d'Applications<br/>© 2025 - Tous droits réservés</p>
         </aside> 

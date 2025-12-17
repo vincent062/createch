@@ -1,34 +1,73 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion - Créa'Tech{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+<div class="flex justify-center items-center min-h-[10vh-4rem] py-12 bg-base-200">
+    <div class="card w-full max-w-md bg-base-100 shadow-xl m-4">
+        <div class="card-body">
+            
+            {# En-tête de la carte #}
+            <div class="text-center mb-6">
+                <div class="avatar mb-4">
+                    <div class="w-20 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                        <img src="{{ asset('img/logo.jpeg') }}" alt="Logo" />
+                    </div>
+                </div>
+                <h1 class="text-2xl font-bold">Bon retour parmi nous ! 👋</h1>
+                <p class="text-sm text-base-content/70">Connectez-vous à votre espace admin</p>
+            </div>
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ logout_path() }}">Logout</a>
+            <form method="post">
+                {# Gestion des erreurs #}
+                {% if error %}
+                    <div role="alert" class="alert alert-error mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span>{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+                    </div>
+                {% endif %}
+
+                {# Message si l'utilisateur était déjà connecté (rare sur cette page, mais utile) #}
+                {% if app.user %}
+                    <div class="alert alert-info mb-4">
+                        Vous êtes déjà connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}" class="font-bold underline">se déconnecter</a>
+                    </div>
+                {% endif %}
+
+                {# Champ Email #}
+                <div class="form-control mb-4">
+                    <label for="inputEmail" class="label">
+                        <span class="label-text">Adresse Email</span>
+                    </label>
+                    <label class="input input-bordered flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70"><path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" /><path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" /></svg>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="grow" placeholder="email@exemple.com" autocomplete="email" required autofocus />
+                    </label>
+                </div>
+
+                {# Champ Mot de passe #}
+                <div class="form-control mb-6">
+                    <label for="inputPassword" class="label">
+                        <span class="label-text">Mot de passe</span>
+                    </label>
+                    <label class="input input-bordered flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70"><path fill-rule="evenodd" d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z" clip-rule="evenodd" /></svg>
+                        <input type="password" name="password" id="inputPassword" class="grow" placeholder="••••••••" autocomplete="current-password" required />
+                    </label>
+                </div>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                {# Bouton de validation #}
+                <button class="btn btn-primary w-full" type="submit">
+                    Se connecter
+                </button>
+            </form>
+            
+            <div class="mt-4 text-center">
+                <a href="{{ path('app_home') }}" class="link link-hover text-sm">Retour à l'accueil</a>
+            </div>
         </div>
-    {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-    <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
-
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" name="_remember_me"> Remember me
-        </label>
     </div>
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+</div>
 {% endblock %}
