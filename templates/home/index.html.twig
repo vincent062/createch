@@ -4,20 +4,60 @@
 
 {% block body %}
 
-    {# 1. HERO SECTION (Votre design Tailwind) #}
-    <div class="hero min-h-[70vh] bg-base-200">
-        <div class="hero-content text-center">
+    {# --- SECTION HERO HIGH-TECH --- #}
+    <div class="hero min-h-[85vh] relative overflow-hidden bg-base-300">
+        
+        {# Arrière-plan technique (Grille + Effet) #}
+        <div class="absolute inset-0 z-0 opacity-20" 
+             style="background-image: linear-gradient(#4b5563 1px, transparent 1px), linear-gradient(90deg, #4b5563 1px, transparent 1px); background-size: 40px 40px;">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-base-300 via-transparent to-transparent z-0"></div>
+
+        <div class="hero-content text-center relative z-10">
             <div class="max-w-3xl">
-                <h1 class="text-5xl md:text-7xl font-black mb-8 text-base-content">
-                    Développons votre <br>
-                    <span class="text-primary bg-clip-text">avenir numérique.</span>
+                
+                {# Badge style "Console" #}
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-mono mb-6 tracking-widest uppercase">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                    </span>
+                    System Online v2.0
+                </div>
+
+                {# Titre avec effet dégradé #}
+                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight mb-6">
+                    L'Innovation Digitale <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent animate-pulse">
+                        Code & Création
+                    </span>
                 </h1>
-                <p class="py-6 text-xl text-base-content/70">
-                     "Propulsez votre entreprise avec des solutions web alliant design d'exception et performance technique."
+
+                <p class="py-6 text-lg md:text-xl opacity-80 max-w-2xl mx-auto leading-relaxed">
+                    Transformez votre vision en réalité numérique. 
+                    <span class="font-mono text-primary bg-base-100 px-1 rounded">&lt;Dev&gt;</span> 
+                    Sites Web, 
+                    <span class="font-mono text-secondary bg-base-100 px-1 rounded">{Apps}</span> 
+                    Mobiles et Solutions Sur-Mesure.
                 </p>
-                <div class="flex flex-col md:flex-row justify-center gap-4 mt-6">
-                    <a href="{{ path('app_contact') }}" class="btn btn-primary btn-wide shadow-lg shadow-primary/30">Démarrer un projet</a>
-                    <a href="#services" class="btn btn-outline btn-wide">Découvrir nos offres</a>
+
+                {# Boutons Cyberpunk #}
+                <div class="flex flex-col sm:flex-row gap-4 justify-center mt-4">
+                    <a href="{{ path('app_contact') }}" class="btn btn-primary btn-lg shadow-[0_0_20px_rgba(var(--p),0.4)] hover:shadow-[0_0_30px_rgba(var(--p),0.6)] border-none text-white relative overflow-hidden group">
+                        <span class="relative z-10">Lancer le protocole</span>
+                        <div class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/20"></div>
+                    </a>
+                    
+                    <a href="#services" class="btn btn-outline btn-lg hover:bg-white hover:text-black group">
+                        <span class="group-hover:translate-x-1 transition-transform">Explorer les données →</span>
+                    </a>
+                </div>
+
+                {# Décoration de code #}
+                <div class="mt-12 opacity-30 text-xs font-mono select-none hidden md:block">
+                    <p>initiating_sequence... [OK]</p>
+                    <p>loading_assets... 100%</p>
+                    <p>connecting_to_server... <span class="text-success">ESTABLISHED</span></p>
                 </div>
             </div>
         </div>
