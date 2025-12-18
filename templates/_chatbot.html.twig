@@ -1,0 +1,92 @@
+{# --- MASCOTTE CHATBOT --- #}
+<div id="chatbot-container" class="fixed bottom-6 right-6 z-50 flex flex-col items-end font-sans">
+
+    {# 1. La fenêtre de chat (cachée par défaut) #}
+    <div id="chatbot-window" class="hidden bg-base-100 w-80 shadow-2xl rounded-2xl overflow-hidden border border-base-200 mb-4 transition-all duration-300 transform scale-95 origin-bottom-right">
+        
+        {# En-tête du chat #}
+        <div class="bg-primary text-primary-content p-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="avatar">
+                    <div class="w-8 rounded-full bg-base-100 p-1">
+                        
+                        <img src="{{asset ('img/robot.jpg.png') }}" alt="Mascotte" />
+                    </div>
+                </div>
+                <span class="font-bold">Ton Assistant Robot</span>
+            </div>
+            <button onclick="toggleChat()" class="btn btn-sm btn-ghost btn-circle text-white">
+                ✕
+            </button>
+        </div>
+
+        {# Zone des messages #}
+        <div class="p-4 h-64 overflow-y-auto bg-base-200 flex flex-col gap-2" id="chat-messages">
+            
+            {# Message de bienvenue automatique #}
+            <div class="chat chat-start">
+                <div class="chat-image avatar">
+                    <div class="w-10 rounded-full border border-base-300">
+                        <img src="{{asset ('img/robot.jpg.png') }}" />
+                    </div>
+                </div>
+                <div class="chat-bubble chat-bubble-primary">
+                    Bonjour ! 👋 Je suis la mascotte de Créa'Tech. Comment puis-je t'aider aujourd'hui ?
+                </div>
+            </div>
+
+            {# Suggestion de liens #}
+            <div class="chat chat-start">
+                 <div class="chat-bubble bg-base-100 text-base-content shadow-sm">
+                    Je peux te guider vers :<br/>
+                    <a href="{{ path('app_contact') }}" class="btn btn-xs btn-outline btn-primary mt-2">Le formulaire de contact</a>
+                </div>
+            </div>
+
+        </div>
+
+        {# Zone de saisie (Visuelle pour l'instant) #}
+        <div class="p-3 bg-base-100 border-t border-base-200">
+            <div class="join w-full">
+                <input class="input input-bordered input-sm w-full join-item focus:outline-none" placeholder="Écris un message..." disabled />
+                <button class="btn btn-sm btn-primary join-item">Envoyer</button>
+            </div>
+            <div class="text-xs text-center text-gray-400 mt-1">Chatbot en construction 🚧</div>
+        </div>
+    </div>
+
+    {# 2. Le Bouton Flottant (La Tête du Robot) #}
+    <button onclick="toggleChat()" class="btn btn-circle btn-lg btn-primary shadow-lg hover:scale-110 transition-transform duration-200 w-24 h-24 ring ring-primary ring-offset-2 ring-offset-base-100">
+        <div class="avatar">
+            <div class="w-20 rounded-full">
+                
+                <img src="{{asset ('img/robot.jpg.png') }}" alt="Ouvrir le chat" />
+            </div>
+        </div>
+    </button>
+
+</div>
+
+<script>
+    // Petit script simple pour gérer l'ouverture/fermeture
+    function toggleChat() {
+        const window = document.getElementById('chatbot-window');
+        
+        if (window.classList.contains('hidden')) {
+            // Ouvrir
+            window.classList.remove('hidden');
+            setTimeout(() => {
+                window.classList.remove('scale-95', 'opacity-0');
+                window.classList.add('scale-100', 'opacity-100');
+            }, 10); // Petit délai pour l'animation
+        } else {
+            // Fermer
+            window.classList.add('scale-95', 'opacity-0');
+            window.classList.remove('scale-100', 'opacity-100');
+            
+            setTimeout(() => {
+                window.classList.add('hidden');
+            }, 300); // Attendre la fin de l'animation
+        }
+    }
+</script>
