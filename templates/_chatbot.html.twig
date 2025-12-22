@@ -1,92 +1,176 @@
-{# --- MASCOTTE CHATBOT --- #}
-<div id="chatbot-container" class="fixed bottom-6 right-6 z-50 flex flex-col items-end font-sans">
+{# templates/_chatbot.html.twig #}
 
-    {# 1. La fenêtre de chat (cachée par défaut) #}
-    <div id="chatbot-window" class="hidden bg-base-100 w-80 shadow-2xl rounded-2xl overflow-hidden border border-base-200 mb-4 transition-all duration-300 transform scale-95 origin-bottom-right">
+{# --- 1. LE BOUTON FLOTTANT (Toujours visible) --- #}
+<div class="fixed bottom-6 right-6 z-50">
+    {# Le cercle animé derrière pour l'effet "Pulse" #}
+    <div class="absolute inset-0 rounded-full bg-primary opacity-75 animate-ping"></div>
+    
+    <button onclick="toggleChat()" class="relative btn btn-circle btn-primary btn-lg shadow-lg border-2 border-white/20 hover:scale-110 transition-transform duration-300">
+        {# Icône de Robot ou Bulle #}
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+        </svg>
+    </button>
+</div>
+
+{# --- 2. LA FENÊTRE DE CHAT (Cachée par défaut) --- #}
+<div id="chat-window" class="fixed bottom-24 right-6 z-50 w-80 md:w-96 transform scale-0 origin-bottom-right transition-transform duration-300 ease-in-out">
+    
+    <div class="card bg-base-100/90 backdrop-blur-md border border-primary/30 shadow-2xl overflow-hidden">
         
-        {# En-tête du chat #}
-        <div class="bg-primary text-primary-content p-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="avatar">
-                    <div class="w-8 rounded-full bg-base-100 p-1">
-                        
-                        <img src="{{asset ('img/robot.jpg.png') }}" alt="Mascotte" />
+        {# En-tête du Chat #}
+        <div class="bg-primary/20 p-4 flex justify-between items-center border-b border-primary/10">
+            <div class="flex items-center gap-3">
+                <div class="avatar online">
+                    <div class="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                        {# On utilise ton image de robot si elle existe, sinon une image par défaut #}
+                        <img src="{{ asset('img/robot.jpg.png') }}" alt="Bot Avatar" />
                     </div>
                 </div>
-                <span class="font-bold">Ton Assistant Robot</span>
+                <div>
+                    <h3 class="font-bold text-sm">Crea'Bot </h3>
+                    <p class="text-xs text-base-content/60">Assistant Virtuel</p>
+                </div>
             </div>
-            <button onclick="toggleChat()" class="btn btn-sm btn-ghost btn-circle text-white">
-                ✕
+            <button onclick="toggleChat()" class="btn btn-ghost btn-xs btn-circle text-base-content/50 hover:text-error">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
         </div>
 
-        {# Zone des messages #}
-        <div class="p-4 h-64 overflow-y-auto bg-base-200 flex flex-col gap-2" id="chat-messages">
+        {# Zone des Messages #}
+        <div id="chat-messages" class="p-4 h-80 overflow-y-auto space-y-4 bg-gradient-to-b from-base-100 to-base-200 scrollbar-thin scrollbar-thumb-primary scrollbar-track-base-200">
             
-            {# Message de bienvenue automatique #}
+            {# Message du Robot (Statique pour l'instant) #}
             <div class="chat chat-start">
                 <div class="chat-image avatar">
-                    <div class="w-10 rounded-full border border-base-300">
-                        <img src="{{asset ('img/robot.jpg.png') }}" />
+                    <div class="w-8 rounded-full">
+                        <img src="{{ asset('img/robot.jpg.png') }}" />
                     </div>
                 </div>
-                <div class="chat-bubble chat-bubble-primary">
-                    👋 Salut! je suis SPARK. Comment puis-je t'aider aujourd'hui ?
+                <div class="chat-bubble chat-bubble-primary text-sm shadow-md">
+                    Bonjour !  <br>Je suis SPARK l'IA de Créa'Tech. Comment puis-je vous aider aujourd'hui ?
                 </div>
             </div>
 
-            {# Suggestion de liens #}
-            <div class="chat chat-start">
-                 <div class="chat-bubble bg-base-100 text-base-content shadow-sm">
-                    Je peux te guider vers :<br/>
-                    <a href="{{ path('app_contact') }}" class="btn btn-xs btn-outline btn-primary mt-2">Le formulaire de contact</a>
-                </div>
+            {# Suggestions (Réponses rapides) #}
+            <div class="flex flex-wrap gap-2 mt-2 pl-10">
+                <button onclick="sendQuickReply('Je veux un devis')" class="badge badge-outline badge-primary hover:bg-primary hover:text-white cursor-pointer transition-colors p-3">💶 Demander un devis</button>
+                <button onclick="sendQuickReply('Vos services ?')" class="badge badge-outline badge-secondary hover:bg-secondary hover:text-white cursor-pointer transition-colors p-3">🛠 Nos services</button>
+                <button onclick="sendQuickReply('Parler à un humain')" class="badge badge-outline badge-accent hover:bg-accent hover:text-white cursor-pointer transition-colors p-3">👤 Contact Humain</button>
             </div>
 
         </div>
 
-        {# Zone de saisie (Visuelle pour l'instant) #}
-        <div class="p-3 bg-base-100 border-t border-base-200">
-            <div class="join w-full">
-                <input class="input input-bordered input-sm w-full join-item focus:outline-none" placeholder="Écris un message..." disabled />
-                <button class="btn btn-sm btn-primary join-item">Envoyer</button>
-            </div>
-            <div class="text-xs text-center text-gray-400 mt-1">Chatbot en construction 🚧</div>
+        {# Zone de Saisie #}
+        <div class="p-3 border-t border-base-content/10 bg-base-100">
+            <form onsubmit="sendMessage(event)" class="flex gap-2">
+                <input type="text" id="chat-input" placeholder="Écrivez votre message..." class="input input-bordered input-sm w-full focus:outline-none focus:border-primary rounded-full" autocomplete="off">
+                <button type="submit" class="btn btn-primary btn-sm btn-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                    </svg>
+                </button>
+            </form>
         </div>
     </div>
-
-    {# 2. Le Bouton Flottant (La Tête du Robot) #}
-    <button onclick="toggleChat()" class="btn btn-circle btn-lg btn-primary shadow-lg hover:scale-110 transition-transform duration-200 w-24 h-24 ring ring-primary ring-offset-2 ring-offset-base-100">
-        <div class="avatar">
-            <div class="w-20 rounded-full">
-                
-                <img src="{{asset ('img/robot.jpg.png') }}" alt="Ouvrir le chat" />
-            </div>
-        </div>
-    </button>
-
 </div>
 
+{# --- 3. LE JAVASCRIPT (Juste pour l'animation pour l'instant) --- #}
 <script>
-    // Petit script simple pour gérer l'ouverture/fermeture
     function toggleChat() {
-        const window = document.getElementById('chatbot-window');
-        
-        if (window.classList.contains('hidden')) {
-            // Ouvrir
-            window.classList.remove('hidden');
-            setTimeout(() => {
-                window.classList.remove('scale-95', 'opacity-0');
-                window.classList.add('scale-100', 'opacity-100');
-            }, 10); // Petit délai pour l'animation
+        const chatWindow = document.getElementById('chat-window');
+        // On bascule entre scale-0 (caché) et scale-100 (visible)
+        if (chatWindow.classList.contains('scale-0')) {
+            chatWindow.classList.remove('scale-0');
+            chatWindow.classList.add('scale-100');
         } else {
-            // Fermer
-            window.classList.add('scale-95', 'opacity-0');
-            window.classList.remove('scale-100', 'opacity-100');
-            
-            setTimeout(() => {
-                window.classList.add('hidden');
-            }, 300); // Attendre la fin de l'animation
+            chatWindow.classList.remove('scale-100');
+            chatWindow.classList.add('scale-0');
         }
     }
+
+    function sendMessage(event) {
+        event.preventDefault(); // Empêche le rechargement de la page
+        const input = document.getElementById('chat-input');
+        const message = input.value.trim();
+        
+        if (message) {
+            addMessage(message, 'end'); // Ajoute mon message (droite)
+            input.value = '';
+            
+            // Simulation de réponse automatique (Fake AI)
+            setTimeout(() => {
+                showTypingIndicator();
+            }, 500);
+            
+            setTimeout(() => {
+                removeTypingIndicator();
+                addMessage("Je suis encore en formation 🧠, mais vous pouvez utiliser la page Contact pour écrire à Vincent !", 'start');
+            }, 2500);
+        }
+    }
+
+    function sendQuickReply(text) {
+        addMessage(text, 'end');
+        setTimeout(() => {
+            showTypingIndicator();
+        }, 500);
+        setTimeout(() => {
+            removeTypingIndicator();
+            let response = "Intéressant ! Dites-m'en plus.";
+            if(text.includes('devis')) response = "Excellente idée ! Pour un devis précis, le formulaire de contact est le meilleur endroit.";
+            if(text.includes('services')) response = "Nous faisons du Web, du Mobile et du Sur-Mesure. Regardez la section Services de la page d'accueil !";
+            if(text.includes('humain')) response = "Vincent recevra votre message si vous passez par le formulaire de contact.";
+            
+            addMessage(response, 'start');
+        }, 1500);
+    }
+
+    function addMessage(text, position) {
+        const messagesDiv = document.getElementById('chat-messages');
+        const bubbleColor = position === 'end' ? 'chat-bubble-secondary' : 'chat-bubble-primary';
+        const avatar = position === 'start' ? 
+            `<div class="chat-image avatar"><div class="w-8 rounded-full"><img src="{{ asset('img/robot.jpg.png') }}" /></div></div>` : 
+            '';
+
+        const html = `
+            <div class="chat chat-${position} animate-fade-in-up">
+                ${avatar}
+                <div class="chat-bubble ${bubbleColor} text-sm shadow-md">${text}</div>
+            </div>
+        `;
+        messagesDiv.insertAdjacentHTML('beforeend', html);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll vers le bas
+    }
+
+    // Indicateur de frappe "..."
+    function showTypingIndicator() {
+        const messagesDiv = document.getElementById('chat-messages');
+        const html = `
+            <div id="typing-indicator" class="chat chat-start">
+                <div class="chat-image avatar"><div class="w-8 rounded-full"><img src="{{ asset('img/robot.jpg.png') }}" /></div></div>
+                <div class="chat-bubble chat-bubble-primary text-sm shadow-md flex gap-1 items-center h-10">
+                    <span class="loading loading-dots loading-xs"></span>
+                </div>
+            </div>
+        `;
+        messagesDiv.insertAdjacentHTML('beforeend', html);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+        const indicator = document.getElementById('typing-indicator');
+        if (indicator) indicator.remove();
+    }
 </script>
+
+<style>
+    /* Petite animation d'apparition des messages */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in-up {
+        animation: fadeInUp 0.3s ease-out forwards;
+    }
+</style>
