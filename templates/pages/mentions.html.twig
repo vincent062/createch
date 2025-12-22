@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mentions Légales - Créa'Tech{% endblock %}
+
+{% block body %}
+<div class="container mx-auto px-4 py-12 max-w-4xl">
+    
+    <h1 class="text-4xl font-bold mb-8 text-primary">Mentions Légales</h1>
+    
+    <div class="space-y-8 text-base-content/80">
+
+        {# 1. Éditeur #}
+        <section class="card bg-base-200 shadow-sm p-6">
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                <span class="text-secondary">1.</span> Édition du site
+            </h2>
+            <p>
+                Le présent site, accessible à l’URL <strong>www.createch-wa.fr</strong> (le « Site »), est édité par :
+            </p>
+            <ul class="list-disc list-inside mt-2 ml-4">
+                <li><strong>Raison sociale :</strong> [Créa'Tech / KAZMIERCZAK Vincent]</li>
+                <li><strong>Siège social :</strong> [03 Résidence les Picots, 62580 VIMY]</li>
+                <li><strong>SIRET :</strong> []</li>
+                <li><strong>Directeur de la publication :</strong> [KAZMIERCZAK Vincent]</li>
+            </ul>
+        </section>
+
+        {# 2. Hébergeur #}
+        <section class="card bg-base-200 shadow-sm p-6">
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                <span class="text-secondary">2.</span> Hébergement
+            </h2>
+            <p>
+                Le Site est hébergé par la société <strong>[O2Switch]</strong>.
+            </p>
+            <ul class="list-disc list-inside mt-2 ml-4">
+                <li><strong>Adresse :</strong> [Adresse de l'hébergeur]</li>
+                <li><strong>Téléphone :</strong> [Numéro de l'hébergeur]</li>
+            </ul>
+        </section>
+
+        {# 3. Contact #}
+        <section class="card bg-base-200 shadow-sm p-6">
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                <span class="text-secondary">3.</span> Nous contacter
+            </h2>
+            <p>
+                Par téléphone : <a href="tel:+33600000000" class="link link-primary">[Ton Numéro]</a><br>
+                Par email : <a href="mailto:contact@crea-tech.fr" class="link link-primary">[Ton Email]</a><br>
+                Par courrier : [Ton Adresse postale]
+            </p>
+        </section>
+
+        {# 4. Données personnelles #}
+        <section class="card bg-base-200 shadow-sm p-6">
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                <span class="text-secondary">4.</span> Données personnelles
+            </h2>
+            <p class="mb-2">
+                Le traitement de vos données à caractère personnel est régi par notre 
+                <span class="font-bold">Charte de Confidentialité</span>.
+            </p>
+            <p>
+                Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d’un droit d’accès, de rectification et d’effacement de vos données.
+            </p>
+        </section>
+
+    </div>
+</div>
+{% endblock %}

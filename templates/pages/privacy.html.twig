@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Politique de Confidentialité - Créa'Tech{% endblock %}
+
+{% block body %}
+<div class="container mx-auto px-4 py-12 max-w-4xl">
+    
+    <h1 class="text-4xl font-bold mb-8 text-primary">Politique de Confidentialité</h1>
+    
+    <div class="space-y-8 text-base-content/80">
+
+        <p class="text-lg">
+            La protection de vos données personnelles est une priorité pour <strong>Créa'Tech</strong>. Cette politique de confidentialité vous explique comment nous collectons, utilisons et protégeons vos informations.
+        </p>
+
+        {# 1. Collecte des données #}
+        <section class="card bg-base-200 shadow-sm p-6">
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                <span class="text-secondary">1.</span> Données collectées
+            </h2>
+            <p class="mb-2">Nous collectons les informations suivantes via le formulaire de contact :</p>
+            <ul class="list-disc list-inside ml-4 space-y-1">
+                <li>Nom et Prénom</li>
+                <li>Adresse email</li>
+                <li>Numéro de téléphone (optionnel)</li>
+                <li>Message</li>
+            </ul>
+        </section>
+
+        {# 2. Utilisation #}
+        <section class="card bg-base-200 shadow-sm p-6">
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                <span class="text-secondary">2.</span> Utilisation des données
+            </h2>
+            <p>Vos données sont utilisées uniquement pour :</p>
+            <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+                <li>Répondre à vos demandes de contact ou de devis.</li>
+                <li>La gestion de la relation client.</li>
+            </ul>
+            <div class="alert alert-info mt-4 text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span>Nous ne vendons ni ne louons vos données personnelles à des tiers.</span>
+            </div>
+        </section>
+
+        {# 3. Conservation #}
+        <section class="card bg-base-200 shadow-sm p-6">
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                <span class="text-secondary">3.</span> Durée de conservation
+            </h2>
+            <p>
+                Les données issues du formulaire de contact sont conservées pendant une durée maximale de <strong>3 ans</strong> après le dernier contact, sauf obligation légale contraire.
+            </p>
+        </section>
+
+        {# 4. Vos droits #}
+        <section class="card bg-base-200 shadow-sm p-6">
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                <span class="text-secondary">4.</span> Vos droits
+            </h2>
+            <p class="mb-4">
+                Conformément au RGPD, vous disposez des droits suivants sur vos données :
+            </p>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="badge badge-outline p-4 w-full justify-start gap-2">✅ Droit d'accès</div>
+                <div class="badge badge-outline p-4 w-full justify-start gap-2">✏️ Droit de rectification</div>
+                <div class="badge badge-outline p-4 w-full justify-start gap-2">🗑️ Droit à l'effacement</div>
+                <div class="badge badge-outline p-4 w-full justify-start gap-2">✋ Droit d'opposition</div>
+            </div>
+            <p class="mt-6">
+                Pour exercer ces droits, contactez-nous à : <a href="mailto:contact@crea-tech.fr" class="link link-primary font-bold">contact@crea-tech.fr</a>
+            </p>
+        </section>
+
+    </div>
+</div>
+{% endblock %}

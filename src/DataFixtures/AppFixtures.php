@@ -22,7 +22,7 @@ class AppFixtures extends Fixture
     {
         // 1. Création de l'admin
         $admin = new User();
-        $admin->setEmail('admin@createch.fr');
+        $admin->setEmail('contact@createch.fr');
         $admin->setRoles(['ROLE_ADMIN']);
         $password = $this->hasher->hashPassword($admin, 'password');
         $admin->setPassword($password);
@@ -34,6 +34,7 @@ class AppFixtures extends Fixture
         $services = [
             'Site Vitrine' => 'Présentez votre activité avec un site élégant et performant.',
             'Boutique E-commerce' => 'Vendez vos produits en ligne 24h/24 avec une solution sécurisée.',
+            'Applications Mobiles' => 'Votre application native iOS et Android disponible sur les stores.',
             'Référencement SEO' => 'Améliorez votre visibilité sur Google et attirez plus de clients.',
             'Maintenance Web' => 'Gardez votre site à jour et sécurisé sans vous soucier de la technique.'
         ];
