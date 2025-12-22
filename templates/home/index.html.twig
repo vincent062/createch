@@ -121,5 +121,213 @@
             </div>
         </div>
     </section>
+    {# --- SECTION GAMME DE PRIX (PROJETS) --- #}
+    <section class="py-20 px-4 bg-base-100 relative">
+        <div class="max-w-7xl mx-auto">
+            
+            {# Titre de section #}
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-base-content/10 pb-6">
+                <div>
+                    <h2 class="text-4xl font-bold uppercase tracking-widest text-secondary">Initialisation Projet</h2>
+                    <p class="mt-2 text-base-content/60">Choisissez l'architecture adaptée à vos objectifs.</p>
+                </div>
+                <div class="badge badge-outline badge-lg mt-4 md:mt-0">Tarifs indicatifs TTC</div>
+            </div>
 
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                {# PROJET 1 : VITRINE #}
+                <div class="card bg-base-200 shadow-xl hover:shadow-secondary/20 transition-all duration-300 border-t-4 border-secondary">
+                    <div class="card-body">
+                        <div class="flex justify-between items-start">
+                            <h3 class="card-title text-2xl font-mono">Site Vitrine</h3>
+                            <span class="badge badge-secondary badge-outline">Essentiel</span>
+                        </div>
+                        
+                        <div class="my-6">
+                            <p class="text-xs uppercase tracking-wide opacity-50 mb-1">Budget estimé</p>
+                            <div class="text-3xl font-bold">À partir de<br> 1 290€</div>
+                        </div>
+
+                        {# Jauge de complexité #}
+                        <div class="mb-6">
+                            <div class="flex justify-between text-xs mb-1 opacity-70">
+                                <span>Complexité</span>
+                                <span>Faible</span>
+                            </div>
+                            <progress class="progress progress-secondary w-full" value="30" max="100"></progress>
+                        </div>
+
+                        <ul class="space-y-2 text-sm text-base-content/80 mb-6">
+                            <li>🎯 Présentation de votre activité</li>
+                            <li>📱 Design Responsive (Mobile/PC)</li>
+                            <li>⚡ Formulaire de contact sécurisé</li>
+                            <li>🔍 Optimisation SEO de base</li>
+                        </ul>
+
+                        <div class="card-actions justify-end mt-auto">
+                            <a href="{{ path('app_contact') }}" class="btn btn-sm btn-ghost hover:text-secondary">En savoir plus →</a>
+                        </div>
+                    </div>
+                </div>
+
+                {# PROJET 2 : DYNAMIQUE / E-COMMERCE #}
+                <div class="card bg-base-200 shadow-xl hover:shadow-primary/20 transition-all duration-300 border-t-4 border-primary transform md:-translate-y-4">
+                    <div class="card-body">
+                        <div class="flex justify-between items-start">
+                            <h3 class="card-title text-2xl font-mono">Site Dynamique</h3>
+                            <span class="badge badge-primary">Recommandé</span>
+                        </div>
+                        
+                        <div class="my-6">
+                            <p class="text-xs uppercase tracking-wide opacity-50 mb-1">Budget estimé</p>
+                            <div class="text-3xl font-bold text-primary">À partir de <br> 2 490€</div>
+                        </div>
+
+                        {# Jauge de complexité #}
+                        <div class="mb-6">
+                            <div class="flex justify-between text-xs mb-1 opacity-70">
+                                <span>Complexité</span>
+                                <span>Moyenne</span>
+                            </div>
+                            <progress class="progress progress-primary w-full" value="65" max="100"></progress>
+                        </div>
+
+                        <ul class="space-y-2 text-sm text-base-content/80 mb-6">
+                            <li>🛍️ E-commerce ou Blog avancé</li>
+                            <li>⚙️ Interface d'administration</li>
+                            <li>💳 Paiement en ligne sécurisé</li>
+                            <li>📈 Google Analytics & SEO Avancé</li>
+                        </ul>
+
+                        <div class="card-actions justify-end mt-auto">
+                            <a href="{{ path('app_contact') }}" class="btn btn-primary w-full">Demander un devis</a>
+                        </div>
+                    </div>
+                </div>
+
+                {# PROJET 3 : SUR MESURE / APP #}
+                <div class="card bg-base-200 shadow-xl hover:shadow-accent/20 transition-all duration-300 border-t-4 border-accent">
+                    <div class="card-body">
+                        <div class="flex justify-between items-start">
+                            <h3 class="card-title text-2xl font-mono">App Sur-Mesure</h3>
+                            <span class="badge badge-accent badge-outline">Premium</span>
+                        </div>
+                        
+                        <div class="my-6">
+                            <p class="text-xs uppercase tracking-wide opacity-50 mb-1">Budget estimé</p>
+                            <div class="text-3xl font-bold">Sur Devis</div>
+                            <p class="text-xs text-base-content/50 mt-1">(Souvent > 5 000€)</p>
+                        </div>
+
+                        {# Jauge de complexité #}
+                        <div class="mb-6">
+                            <div class="flex justify-between text-xs mb-1 opacity-70">
+                                <span>Complexité</span>
+                                <span>Élevée</span>
+                            </div>
+                            <progress class="progress progress-accent w-full" value="95" max="100"></progress>
+                        </div>
+
+                        <ul class="space-y-2 text-sm text-base-content/80 mb-6">
+                            <li>🚀 Application Web (SaaS)</li>
+                            <li>🔐 Espace Membre complexe</li>
+                            <li>🔗 API & Intégrations externes</li>
+                            <li>🎨 Design UX/UI Unique</li>
+                        </ul>
+
+                        <div class="card-actions justify-end mt-auto">
+                            <a href="{{ path('app_contact') }}" class="btn btn-sm btn-ghost hover:text-accent">Discuter du projet →</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            {# Petit texte de réassurance #}
+            <div class="mt-12 text-center">
+                <p class="italic text-base-content/50">
+                    * Ces tarifs sont donnés à titre indicatif. Chaque projet est unique et mérite une étude personnalisée.<br>
+                    <a href="{{ path('app_contact') }}" class="link link-primary no-underline hover:underline">Contactez-nous pour un chiffrage précis.</a>
+                </p>
+            </div>
+
+        </div>
+    </section>
+{# --- SECTION TARIFS MAINTENANCE --- #}
+    <section class="py-20 px-4 relative overflow-hidden">
+        {# Fond décoratif #}
+        <div class="absolute inset-0 bg-base-200/50 -skew-y-3 transform origin-bottom-left z-0"></div>
+        
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Maintenance & Sérénité</h2>
+                <p class="text-base-content/70">Ne laissez pas votre site à l'abandon. Choisissez votre niveau de sécurité.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                
+                {# OFFRE 1 : START #}
+                <div class="card bg-base-100 border border-base-300 shadow-xl hover:-translate-y-2 transition-transform duration-300">
+                    <div class="card-body">
+                        <h3 class="font-mono text-primary text-xl">Protocol_Start</h3>
+                        <div class="text-4xl font-bold my-4">59€<span class="text-lg font-normal text-base-content/50">/mois</span></div>
+                        <p class="text-sm text-base-content/70 mb-6">L'essentiel pour dormir tranquille.</p>
+                        <ul class="space-y-3 mb-8 text-sm">
+                            <li class="flex items-center gap-2"><span class="text-success">✓</span> Hébergement inclus</li>
+                            <li class="flex items-center gap-2"><span class="text-success">✓</span> Sauvegardes Hebdo</li>
+                            <li class="flex items-center gap-2"><span class="text-success">✓</span> Mises à jour de sécurité</li>
+                            <li class="flex items-center gap-2"><span class="text-success">✓</span> Restauration en cas de crash</li>
+                            <li class="flex items-center gap-2 opacity-50"><span class="text-error">✕</span> Modifications de contenu</li>
+                            <li class="flex items-center gap-2 opacity-50"><span class="text-error">✕</span> Pas de temps d'intervention inclus</li>
+                            <li class="flex items-center gap-2 opacity-50"><span class="text-error">✕</span> Pas de rapport mensuel</li>
+                        </ul>
+                        <a href="{{ path('app_contact') }}" class="btn btn-outline btn-primary w-full">Choisir</a>
+                    </div>
+                </div>
+
+                {# OFFRE 2 : PRO (Mise en avant) #}
+                <div class="card bg-base-300 border-2 border-primary shadow-[0_0_30px_rgba(var(--p),0.3)] scale-105 z-20">
+                    <div class="absolute top-0 right-0 bg-primary text-primary-content text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAIRE</div>
+                    <div class="card-body">
+                        <h3 class="font-mono text-primary text-xl flex items-center gap-2">
+                            <span class="loading loading-ring loading-md"></span> Protocol_Pro
+                        </h3>
+                        <div class="text-5xl font-bold my-4 text-primary">89€<span class="text-lg font-normal text-base-content/50">/mois</span></div>
+                        <p class="text-sm text-base-content/70 mb-6">Pour les entreprises actives.</p>
+                        <ul class="space-y-3 mb-8 font-medium">
+                            <li class="flex items-center gap-2"><span class="text-primary">✓</span> Tout du pack Start</li>
+                            <li class="flex items-center gap-2"><span class="text-primary">✓</span> Sauvegardes Journalières</li>
+                            <li class="flex items-center gap-2"><span class="text-primary">✓</span> Monitoring 24/7</li>
+                            <li class="flex items-center gap-2"><span class="text-primary">✓</span> 1h d'intervention / mois</li>
+                            <li class="flex items-center gap-2"><span class="text-primary">✓</span> Rapport d'activité PDF</li>
+                            <li class="flex items-center gap-2"><span class="text-primary">✓</span> Support par mail</li>
+
+
+                        </ul>
+                        <a href="{{ path('app_contact') }}" class="btn btn-primary w-full shadow-lg hover:shadow-primary/50">Activer le système</a>
+                    </div>
+                </div>
+
+                {# OFFRE 3 : ULTIMATE #}
+                <div class="card bg-base-100 border border-base-300 shadow-xl hover:-translate-y-2 transition-transform duration-300">
+                    <div class="card-body">
+                        <h3 class="font-mono text-secondary text-xl">Protocol_Ultimate</h3>
+                        <div class="text-4xl font-bold my-4">199€<span class="text-lg font-normal text-base-content/50">/mois</span></div>
+                        <p class="text-sm text-base-content/70 mb-6">Performance et priorité absolue.</p>
+                        <ul class="space-y-3 mb-8 text-sm">
+                            <li class="flex items-center gap-2"><span class="text-secondary">✓</span> Tout du pack Pro</li>
+                            <li class="flex items-center gap-2"><span class="text-secondary">✓</span> Support Prioritaire (Tel)</li>
+                            <li class="flex items-center gap-2"><span class="text-secondary">✓</span> Optimisation SEO mensuelle</li>
+                            <li class="flex items-center gap-2"><span class="text-secondary">✓</span> 3h d'intervention / mois</li>
+                            <li class="flex items-center gap-2"><span class="text-primary">✓</span> Audit de performance annuel</li>
+
+                        </ul>
+                        <a href="{{ path('app_contact') }}" class="btn btn-outline btn-secondary w-full">Choisir</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
 {% endblock %}
