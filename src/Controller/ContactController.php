@@ -8,6 +8,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface; // <-- Import du Mailer
+use Symfony\Component\Mime\Email;             // <-- Import de l'Email
 use Symfony\Component\Routing\Attribute\Route;
 
 class ContactController extends AbstractController
