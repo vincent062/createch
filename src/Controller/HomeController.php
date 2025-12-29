@@ -12,8 +12,12 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(PrestationRepository $prestationRepository): Response
     {
-        // On ne récupère que les 3 derniers services pour l'accueil
-        $services = $prestationRepository->findBy([], ['id' => 'DESC'], 3);
+        // On demande à Symfony de chercher UNIQUEMENT ces 3 identifiants
+        // REMPLACEZ PAR VOS PROPRES ID !!!
+        $services = $prestationRepository->findBy(
+            ['id' => [18, 19, 20]], 
+            ['id' => 'ASC'] // Cela les trie dans l'ordre croissant des ID
+        );
 
         return $this->render('home/index.html.twig', [
             'prestations' => $services,

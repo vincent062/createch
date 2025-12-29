@@ -61,7 +61,27 @@
                     Admin
                 </a>
             {% else %}
-                <a href="{{ path('app_login') }}" class="btn btn-primary btn-smS">Se connecter</a>
+            {# templates/base.html.twig #}
+
+{# Si je suis connecté, je vois un bouton clair "Retour Admin" #}
+{% if app.user %}
+    <li>
+        <a href="{{ path('admin') }}" class="btn btn-sm btn-primary font-bold">
+            Retour Admin
+        </a>
+    </li>
+
+{# Si je ne suis PAS connecté (Visiteur) #}
+{% else %}
+    <li>
+        {# Bouton "Fantôme" : 3 traits, quasi invisibles #}
+        <a href="{{ path('admin') }}" class="btn btn-ghost btn-circle btn-sm opacity-30 hover:opacity-100 transition-opacity" title="Accès Admin">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+        </a>
+    </li>
+{% endif %}
             {% endif %}
         </div>
     </div>
