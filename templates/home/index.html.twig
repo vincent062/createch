@@ -427,6 +427,50 @@
 
             </div>
         </div>
+{# --- OPTION FORMATION (Alternative à la maintenance) --- #}
+            <div class="mt-16 max-w-4xl mx-auto">
+                <div class="card bg-base-100 shadow-xl border-2 border-dashed border-primary/50 overflow-hidden">
+                    <div class="card-body md:flex-row items-center gap-8 p-8">
+                        
+                        {# Icône / Illustration #}
+                        <div class="text-center md:text-left shrink-0">
+                            <div class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center text-4xl mx-auto md:mx-0">
+                                🎓
+                            </div>
+                        </div>
+
+                        {# Texte #}
+                        <div class="flex-grow text-center md:text-left">
+                            <h3 class="text-2xl font-bold mb-2">Vous préférez être 100% autonome ?</h3>
+                            <p class="text-base-content/70 mb-4">
+                                Pas de soucis ! Optez pour la <span class="font-bold text-primary">Formation "Prise en Main"</span>.
+                                Une demi-journée (3h) pour apprendre à gérer vos textes, images et produits via votre espace administrateur sécurisé.
+                            </p>
+                            <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+                                <span class="badge badge-outline">Mise à jour Contenu</span>
+                                <span class="badge badge-outline">Gestion des Images</span>
+                                <span class="badge badge-outline">Traitement des demandes</span>
+                            </div>
+                        </div>
+
+                        {# Prix & Action #}
+                        <div class="text-center shrink-0 min-w-[150px]">
+                            <div class="text-3xl font-extrabold text-primary mb-1">350 €</div>
+                            <div class="text-xs opacity-60 mb-4">Paiement unique</div>
+                            <a href="{{ path('app_contact', {'sujet': 'Intéressé par la Formation Autonomie'}) }}" class="btn btn-primary btn-sm w-full">
+                                Choisir l'autonomie
+                            </a>
+                        </div>
+
+                    </div>
+                    
+                    {# Bandeau de mise en garde (Honnêteté technique) #}
+                    <div class="bg-base-200 px-8 py-3 text-xs text-center md:text-left flex flex-col md:flex-row gap-2 justify-between items-center opacity-80">
+                        <span>💡 <span class="font-bold">Note :</span> Cette formation couvre la gestion du contenu. La maintenance technique serveur reste sur devis.</span>
+                    </div>
+                </div>
+            </div>
+
     </section>
     
 {% endblock %}
