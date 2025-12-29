@@ -119,7 +119,9 @@
             removeTypingIndicator();
             let response = "Intéressant ! Dites-m'en plus.";
             if(text.includes('devis')) response = "Excellente idée ! Pour un devis précis, le formulaire de contact est le meilleur endroit.";
-            if(text.includes('services')) response = "Nous faisons du Web, du Mobile et du Sur-Mesure. Regardez la section Services de la page d'accueil !";
+            // --- MODIFICATION ICI : On aligne avec vos 3 services ---
+            if(text.includes('services')) response = "Nous proposons 3 solutions phares : Site Vitrine, E-commerce et Application Mobile (iOS/Android).";
+            // --------------------------------------------------------
             if(text.includes('humain')) response = "Vincent recevra votre message si vous passez par le formulaire de contact.";
             
             addMessage(response, 'start');
