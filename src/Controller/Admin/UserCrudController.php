@@ -3,17 +3,25 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserCrudController extends AbstractCrudController
 {
+    // On injecte le service de hachage de mot de passe
+    private UserPasswordHasherInterface $hasher;
+
+    public function __construct(UserPasswordHasherInterface $hasher)
+    {
+        $this->hasher = $hasher;
+    }
+
     public static function getEntityFqcn(): string
     {
         return User::class;
@@ -23,9 +31,9 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
-            EmailField::new('email'),
-            
-            // Champ pour les Rôles (Menu déroulant)
+            EmailField::new('email', 'Adresse Email'),
+
+            // Champ Rôles
             ChoiceField::new('roles', 'Rôles')
                 ->setChoices([
                     'Utilisateur' => 'ROLE_USER',
@@ -34,21 +42,39 @@ class UserCrudController extends AbstractCrudController
                 ->allowMultipleChoices()
                 ->renderExpanded(),
 
-            // --- DÉBUT : Champ Mot de passe ---
+            // --- MOT DE PASSE (VISIBLE) ---
             TextField::new('password', 'Nouveau mot de passe')
-                ->setFormType(RepeatedType::class)
-                ->setFormTypeOptions([
-                    'type' => PasswordType::class,
-                    'first_options' => [
-                        'label' => 'Mot de passe',
-                        'hash_property_path' => 'password', // C'est ici que la magie opère !
-                    ],
-                    'second_options' => ['label' => '(Répéter)'],
-                    'mapped' => false, // Important : on ne mappe pas ce champ directement à l'entité
-                ])
-                ->setRequired($pageName === Crud::PAGE_NEW) // Requis seulement à la création
+                ->setFormTypeOptions(['mapped' => false]) // Important : on ne lie pas directement à la BDD
+                ->setRequired($pageName === Crud::PAGE_NEW)
                 ->onlyOnForms(),
-            // --- FIN ---
         ];
+    }
+
+    // Cette fonction se déclenche quand on CRÉE un utilisateur
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        $this->hashPassword($entityInstance);
+        parent::persistEntity($entityManager, $entityInstance);
+    }
+
+    // Cette fonction se déclenche quand on MODIFIE un utilisateur
+    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        $this->hashPassword($entityInstance);
+        parent::updateEntity($entityManager, $entityInstance);
+    }
+
+    // Notre fonction perso pour crypter le mot de passe
+    private function hashPassword($user): void
+    {
+        // On récupère ce que vous avez tapé dans le formulaire
+        $request = $this->getContext()->getRequest();
+        $formData = $request->request->all('User');
+        $plainPassword = $formData['password'] ?? null;
+
+        // Si un mot de passe a été tapé, on le crypte et on l'injecte
+        if ($plainPassword) {
+            $user->setPassword($this->hasher->hashPassword($user, $plainPassword));
+        }
     }
 }

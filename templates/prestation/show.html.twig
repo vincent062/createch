@@ -1,51 +1,126 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ prestation.titre }} - Crea'Tech{% endblock %}
+{% block title %}{{ prestation.titre }} - Créa'Tech{% endblock %}
 
 {% block body %}
-<div class="min-h-screen bg-base-200 py-10 px-4">
-    <div class="max-w-4xl mx-auto">
-        
-        {# Fil d'ariane / Bouton retour #}
-        <a href="{{ path('app_home') }}" class="btn btn-ghost mb-6">
-            ← Retour à l'accueil
-        </a>
-
-        <div class="card bg-base-100 shadow-xl overflow-hidden">
-            
-            {# Image d'en-tête (si tu en as une, sinon un placeholder coloré) #}
-            {% if prestation.image %}
-                <figure class="h-64 w-full">
-                    <img src="{{ asset('uploads/prestations/' ~ prestation.image) }}" alt="{{ prestation.titre }}" class="w-full h-full object-cover" />
-                </figure>
-            {% else %}
-                <div class="h-48 w-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center">
-                    <span class="text-4xl text-primary-content font-bold">{{ prestation.titre|slice(0,1) }}</span>
-                </div>
-            {% endif %}
-
-            <div class="card-body p-8 md:p-12">
-                <h1 class="text-4xl font-bold mb-4 text-primary">{{ prestation.titre }}</h1>
-                
-                {# Description courte en exergue #}
-                <p class="text-xl font-medium text-base-content/80 mb-8 italic border-l-4 border-secondary pl-4">
-                    {{ prestation.descriptionCourte }}
-                </p>
-
-                <div class="divider"></div>
-
-                {# Contenu riche (si tu utilises du HTML dans ton contenu, utilise le filtre raw) #}
-                <div class="prose max-w-none prose-lg">
-                    {# nl2br permet de garder les sauts de ligne si c'est du texte brut #}
-                    {{ prestation.contenu|nl2br }}
-                </div>
-
-                <div class="card-actions justify-end mt-10">
-                    <button class="btn btn-primary btn-wide">Demander un devis pour ce service</button>
-                </div>
-            </div>
+    <div class="min-h-screen bg-base-300 relative overflow-hidden py-12">
+        {# Fond d'ambiance Tech #}
+        <div class="absolute inset-0 pointer-events-none opacity-5" 
+             style="background-image: radial-gradient(circle at top right, #f28c18 0%, transparent 60%);">
         </div>
 
+        <div class="container mx-auto px-4 relative z-10">
+            
+            {# Fil d'ariane Tech #}
+            <div class="text-sm breadcrumbs text-primary/70 mb-8 font-mono">
+                <ul>
+                    <li><a href="{{ path('app_home') }}">System</a></li>
+                    <li><a href="{{ path('app_home') }}#services">Services</a></li>
+                    <li>{{ prestation.slug }}</li>
+                </ul>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                
+                {# COLONNE GAUCHE : Image & Info Rapide #}
+                <div class="lg:col-span-1 space-y-6">
+                    {# Image avec cadre néon #}
+                    <div class="relative group">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                        <div class="relative bg-base-100 ring-1 ring-base-content/10 rounded-lg overflow-hidden">
+                            {% if prestation.image %}
+                                <img src="{{ prestation.image }}" alt="{{ prestation.titre }}" class="w-full h-64 object-cover md:h-80" />
+                            {% else %}
+                                {# Placeholder si pas d'image #}
+                                <div class="w-full h-64 bg-neutral flex items-center justify-center text-neutral-content">
+                                    <span class="text-4xl">💾</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    {# Carte "Specs" #}
+                    <div class="card bg-base-100 shadow-xl border border-primary/20">
+                        <div class="card-body p-6">
+                            <h3 class="text-lg font-bold text-primary mb-4 font-mono uppercase tracking-wider">
+                                <span class="text-secondary">>_</span> Specs.
+                            </h3>
+                            <ul class="space-y-3 text-sm text-base-content/80 font-mono">
+                                <li class="flex justify-between border-b border-base-content/10 pb-2">
+                                    <span>ID Module:</span>
+                                    <span class="text-white">SRV-{{ '%03d'|format(prestation.id) }}</span>
+                                </li>
+                                <li class="flex justify-between border-b border-base-content/10 pb-2">
+                                    <span>Type:</span>
+                                    <span class="text-secondary">Développement</span>
+                                </li>
+                                <li class="flex justify-between pb-2">
+                                    <span>Disponibilité:</span>
+                                    <span class="badge badge-success badge-sm gap-1">
+                                        <div class="w-1 h-1 rounded-full bg-white"></div> Immédiate
+                                    </span>
+                                </li>
+                            </ul>
+                            
+                            <div class="divider my-2"></div>
+                            
+                            <a href="{{ path('app_contact', {'sujet': 'Devis pour ' ~ prestation.titre}) }}" class="btn btn-primary btn-outline w-full group">
+                                Demander un Devis
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                {# COLONNE DROITE : Contenu Détaillé #}
+                <div class="lg:col-span-2">
+                    <div class="card bg-base-100 shadow-2xl border-t-4 border-primary">
+                        <div class="card-body">
+                            
+                            {# Titre Glitch #}
+                            <h1 class="text-4xl font-extrabold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-primary via-white to-primary bg-300% animate-gradient">
+                                {{ prestation.titre }}
+                            </h1>
+                            
+                            <p class="text-xl text-base-content/70 mb-8 italic border-l-4 border-secondary pl-4 py-1">
+                                {{ prestation.descriptionCourte }}
+                            </p>
+
+                            {# Contenu Riche (HTML autorisé via 'raw') #}
+                            <div class="prose prose-invert prose-lg max-w-none prose-headings:text-primary prose-a:text-secondary hover:prose-a:text-white">
+                                {% if prestation.contenu %}
+                                    {{ prestation.contenu|raw }}
+                                {% else %}
+                                    <div class="alert alert-warning shadow-lg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                                        <span>Contenu en cours de rédaction...</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            {# Section "Features" ou Avantages (Statique pour l'instant, peut être dynamique plus tard) #}
+                            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-4 bg-base-200 rounded-lg flex items-start gap-3 border border-base-content/5 hover:border-primary/50 transition-colors">
+                                    <div class="text-2xl">⚡</div>
+                                    <div>
+                                        <h4 class="font-bold text-white">Performance</h4>
+                                        <p class="text-sm opacity-70">Optimisé pour la vitesse et le référencement.</p>
+                                    </div>
+                                </div>
+                                <div class="p-4 bg-base-200 rounded-lg flex items-start gap-3 border border-base-content/5 hover:border-primary/50 transition-colors">
+                                    <div class="text-2xl">🛡️</div>
+                                    <div>
+                                        <h4 class="font-bold text-white">Sécurité</h4>
+                                        <p class="text-sm opacity-70">Protection des données et code robuste.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
-</div>
 {% endblock %}

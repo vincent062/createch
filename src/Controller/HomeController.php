@@ -12,8 +12,8 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(PrestationRepository $prestationRepository): Response
     {
-        // Récupère tes services depuis la base de données
-        $services = $prestationRepository->findAll();
+        // On ne récupère que les 3 derniers services pour l'accueil
+        $services = $prestationRepository->findBy([], ['id' => 'DESC'], 3);
 
         return $this->render('home/index.html.twig', [
             'prestations' => $services,
