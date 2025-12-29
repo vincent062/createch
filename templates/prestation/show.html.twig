@@ -15,7 +15,7 @@
             <div class="text-sm breadcrumbs text-primary/70 mb-8 font-mono">
                 <ul>
                     <li><a href="{{ path('app_home') }}">System</a></li>
-                    <li><a href="{{ path('app_home') }}#services">Services</a></li>
+                    <li><a href="{{ path('app_prestation_index') }}">Services</a></li>
                     <li>{{ prestation.slug }}</li>
                 </ul>
             </div>
@@ -28,14 +28,24 @@
                     <div class="relative group">
                         <div class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
                         <div class="relative bg-base-100 ring-1 ring-base-content/10 rounded-lg overflow-hidden">
+                            
+                            {# --- LOGIQUE D'IMAGE CORRIGÉE --- #}
                             {% if prestation.image %}
-                                <img src="{{ prestation.image }}" alt="{{ prestation.titre }}" class="w-full h-64 object-cover md:h-80" />
+                                {% if 'http' in prestation.image %}
+                                    {# Cas 1 : Image Internet #}
+                                    <img src="{{ prestation.image }}" alt="{{ prestation.titre }}" class="w-full h-64 object-cover md:h-80" />
+                                {% else %}
+                                    {# Cas 2 : Image Uploadée #}
+                                    <img src="{{ asset('uploads/prestations/' ~ prestation.image) }}" alt="{{ prestation.titre }}" class="w-full h-64 object-cover md:h-80" />
+                                {% endif %}
                             {% else %}
                                 {# Placeholder si pas d'image #}
                                 <div class="w-full h-64 bg-neutral flex items-center justify-center text-neutral-content">
                                     <span class="text-4xl">💾</span>
                                 </div>
                             {% endif %}
+                            {# -------------------------------- #}
+
                         </div>
                     </div>
 
@@ -48,6 +58,7 @@
                             <ul class="space-y-3 text-sm text-base-content/80 font-mono">
                                 <li class="flex justify-between border-b border-base-content/10 pb-2">
                                     <span>ID Module:</span>
+                                    {# Correction de l'ID formaté #}
                                     <span class="text-white">SRV-{{ '%03d'|format(prestation.id) }}</span>
                                 </li>
                                 <li class="flex justify-between border-b border-base-content/10 pb-2">
@@ -86,7 +97,7 @@
                                 {{ prestation.descriptionCourte }}
                             </p>
 
-                            {# Contenu Riche (HTML autorisé via 'raw') #}
+                            {# Contenu Riche #}
                             <div class="prose prose-invert prose-lg max-w-none prose-headings:text-primary prose-a:text-secondary hover:prose-a:text-white">
                                 {% if prestation.contenu %}
                                     {{ prestation.contenu|raw }}
@@ -98,20 +109,20 @@
                                 {% endif %}
                             </div>
 
-                            {# Section "Features" ou Avantages (Statique pour l'instant, peut être dynamique plus tard) #}
+                            {# Features (Statique pour l'exemple) #}
                             <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div class="p-4 bg-base-200 rounded-lg flex items-start gap-3 border border-base-content/5 hover:border-primary/50 transition-colors">
                                     <div class="text-2xl">⚡</div>
                                     <div>
                                         <h4 class="font-bold text-white">Performance</h4>
-                                        <p class="text-sm opacity-70">Optimisé pour la vitesse et le référencement.</p>
+                                        <p class="text-sm opacity-70">Optimisé pour la vitesse.</p>
                                     </div>
                                 </div>
                                 <div class="p-4 bg-base-200 rounded-lg flex items-start gap-3 border border-base-content/5 hover:border-primary/50 transition-colors">
                                     <div class="text-2xl">🛡️</div>
                                     <div>
                                         <h4 class="font-bold text-white">Sécurité</h4>
-                                        <p class="text-sm opacity-70">Protection des données et code robuste.</p>
+                                        <p class="text-sm opacity-70">Protection des données incluse.</p>
                                     </div>
                                 </div>
                             </div>

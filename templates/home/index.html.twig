@@ -254,6 +254,104 @@
 
         </div>
     </section>
+    {# --- SECTION: SYMFONY (AVEC EXEMPLES CMS) --- #}
+    <section class="py-20 bg-base-200 border-y border-base-content/5">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-12 max-w-5xl mx-auto">
+                
+                {# COLONNE GAUCHE : Logo Symfony #}
+                <div class="md:w-1/3 flex justify-center">
+                    <div class="avatar">
+                        <div class="w-40 h-40 p-6 bg-white rounded-full ring ring-primary ring-offset-base-200 ring-offset-4 shadow-2xl flex items-center justify-center">
+                            <img src="https://symfony.com/logos/symfony_black_03.svg" alt="Logo Symfony" class="w-full h-auto" />
+                        </div>
+                    </div>
+                </div>
+
+                {# COLONNE DROITE : Texte & Arguments #}
+                <div class="md:w-2/3">
+                    <h2 class="text-3xl font-bold mb-4">Pourquoi ce n'est pas "juste un site" ?</h2>
+                    
+                    <p class="text-lg mb-8 text-base-content/80 leading-relaxed">
+                        Mes tarifs incluent une technologie d'élite : 
+                        <span class="font-bold text-primary">Symfony 8</span>.
+                        <br><br>
+                        Contrairement aux solutions préconçues comme 
+                        <span class="badge badge-neutral font-bold">WordPress</span>, 
+                        <span class="badge badge-neutral font-bold">Wix</span> ou 
+                        <span class="badge badge-neutral font-bold">Shopify</span>,
+                        je ne vous vends pas une <em>"maison en kit"</em> limitée.
+                        <br>
+                        Je construis une <strong>architecture sur-mesure</strong>, sécurisée et capable de grandir sans limites.
+                    </p>
+
+                    {# Accordéon #}
+                    <div class="join join-vertical w-full bg-base-100 shadow-xl border border-base-300">
+                        
+                        {# Item 1 #}
+                        <div class="collapse collapse-arrow join-item border-base-300 border">
+                            <input type="radio" name="acc-symfony" checked="checked" /> 
+                            <div class="collapse-title text-xl font-medium text-primary">
+                                🚀 Performance & Vitesse
+                            </div>
+                            <div class="collapse-content"> 
+                                <p>Un code ultra-léger, sans plugins inutiles qui ralentissent votre site. Google adore ça.</p>
+                            </div>
+                        </div>
+
+                        {# Item 2 #}
+                        <div class="collapse collapse-arrow join-item border-base-300 border">
+                            <input type="radio" name="acc-symfony" /> 
+                            <div class="collapse-title text-xl font-medium text-primary">
+                                🔐 Sécurité Maximale
+                            </div>
+                            <div class="collapse-content"> 
+                            <p>Le socle technique utilisé par des géants comme <strong>Spotify</strong>, <strong>BlaBlaCar</strong> ou encore le moteur e-commerce <strong>PrestaShop</strong>.</p>
+                            </div>
+                        </div>
+
+                        {# Item 3 #}
+                        <div class="collapse collapse-arrow join-item border-base-300 border">
+                            <input type="radio" name="acc-symfony" /> 
+                            <div class="collapse-title text-xl font-medium text-primary">
+                                📈 Évolutivité Totale
+                            </div>
+                            <div class="collapse-content"> 
+                                <p>Besoin d'ajouter une fonctionnalité complexe dans 6 mois ? Avec Symfony, tout est possible.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+                {# Partie Texte #}
+                <div class="md:w-2/3">
+                    <h2 class="text-3xl font-bold mb-4">Pourquoi choisir la qualité Symfony ?</h2>
+                    
+                    <p class="text-lg mb-6 text-base-content/80">
+                        Mes tarifs reflètent un choix technologique fort : celui de développer votre site avec 
+                        <span class="font-bold text-primary">Symfony 8</span>, le standard des applications web professionnelles.
+                    </p>
+
+                    <div class="collapse collapse-plus bg-base-100 shadow-xl border border-base-300">
+                        <input type="checkbox" checked="checked" /> 
+                        <div class="collapse-title text-xl font-medium flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            Investissement Durable
+                        </div>
+                        <div class="collapse-content"> 
+                            <p>Contrairement aux solutions "préfabriquées" à la durée de vie limitée, je vous livre un code <strong>sur-mesure, sécurisé et évolutif</strong>. Vous n'aurez pas à tout refaire dans 2 ans.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
 {# --- SECTION TARIFS MAINTENANCE --- #}
     <section class="py-20 px-4 relative overflow-hidden">
         {# Fond décoratif #}
@@ -330,42 +428,5 @@
             </div>
         </div>
     </section>
-    {# --- SECTION: JUSTIFICATION TECHNIQUE / PRIX --- #}
-    <section class="py-16 bg-base-200">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center gap-10 max-w-5xl mx-auto">
-                
-                {# Partie Visuelle (Icône ou Image) #}
-                <div class="md:w-1/3 flex justify-center">
-                    <div class="avatar placeholder">
-                        <div class="bg-neutral text-neutral-content rounded-full w-32 h-32 ring ring-primary ring-offset-base-100 ring-offset-2">
-                            <span class="text-5xl">🛡️</span>
-                        </div>
-                    </div>
-                </div>
-
-                {# Partie Texte #}
-                <div class="md:w-2/3">
-                    <h2 class="text-3xl font-bold mb-4">Pourquoi choisir la qualité Symfony ?</h2>
-                    
-                    <p class="text-lg mb-6 text-base-content/80">
-                        Mes tarifs reflètent un choix technologique fort : celui de développer votre site avec 
-                        <span class="font-bold text-primary">Symfony 8</span>, le standard des applications web professionnelles.
-                    </p>
-
-                    <div class="collapse collapse-plus bg-base-100 shadow-xl border border-base-300">
-                        <input type="checkbox" checked="checked" /> 
-                        <div class="collapse-title text-xl font-medium flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                            Investissement Durable
-                        </div>
-                        <div class="collapse-content"> 
-                            <p>Contrairement aux solutions "préfabriquées" à la durée de vie limitée, je vous livre un code <strong>sur-mesure, sécurisé et évolutif</strong>. Vous n'aurez pas à tout refaire dans 2 ans.</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
+    
 {% endblock %}
