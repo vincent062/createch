@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="fr" data-theme="halloween">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Créa'Tech - Partenaire Digital{% endblock %}</title>
-    <meta name="description" content="Agence Web Créa'Tech : Création de sites internet sur-mesure (Symfony), E-commerce et Applications Mobiles. Devis gratuit et accompagnement personnalisé.">
     
+    {# --- SEO ESSENTIEL --- #}
+    <title>{% block title %}Créa'Tech - Agence Web & Mobile{% endblock %}</title>
+    <meta name="description" content="Développement de sites web sur-mesure (Symfony), E-commerce et Applications Mobiles. Transformez votre vision en réalité numérique avec Créa'Tech.">
+    <meta name="author" content="Vincent - Créa'Tech">
+    
+    {# --- FAVICON (L'icône de l'onglet) --- #}
+    <link rel="icon" href="{{ asset('img/logo.jpeg') }}">
+
+    {# --- STYLES --- #}
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="icon" href="{{ asset('img/logo.jpeg') }}">
-    
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-    </style>
+    <style>body { font-family: 'Inter', sans-serif; }</style>
     
     {% block stylesheets %}{% endblock %}
 </head>
