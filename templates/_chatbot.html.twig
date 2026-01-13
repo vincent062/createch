@@ -14,7 +14,7 @@
 </div>
 
 {# --- 2. LA FENÊTRE DE CHAT (Cachée par défaut) --- #}
-<div id="chat-window" class="fixed bottom-24 right-6 z-50 w-80 md:w-96 transform scale-0 origin-bottom-right transition-transform duration-300 ease-in-out">
+<div id="chat-window" class="fixed bottom-24 right-6 z-50 w-[90vw] sm:w-80 md:w-96 transform scale-0 origin-bottom-right transition-transform duration-300 ease-in-out">
     
     <div class="card bg-base-100/90 backdrop-blur-md border border-primary/30 shadow-2xl overflow-hidden">
         
@@ -75,8 +75,8 @@
     </div>
 </div>
 
-         /* --- CONFIGURATION DES SERVICES --- */
-         // On génère l'URL de base avec un "placeholder" qu'on remplacera par le vrai slug en JS
+            {# CONFIGURATION DES SERVICES  #}
+            {# On génère l'URL de base avec un "placeholder" qu'on remplacera par le vrai slug en JS #}
 <script>
     const baseUrl = "{{ path('app_prestation_show', {'slug': 'PLACEHOLDER'}) }}";
     
@@ -179,7 +179,7 @@
                 link: { label: "Voir tous nos services", url: "{{ path('app_prestation_index') }}" }
             };
         }
-        
+
         // 2. LE COMMERCIAL (Prix / Devis)
         if (lowerMsg.includes('prix') || lowerMsg.includes('tarif') || lowerMsg.includes('coût') || lowerMsg.includes('combien') || lowerMsg.includes('devis') || lowerMsg.includes('argent')) {
             return {
@@ -193,7 +193,7 @@
             return {
                 text: "Une image vaut mille mots ! J'ai rassemblé mes meilleures créations sur la page d'accueil.",
                 // Assure-toi d'avoir une section avec id="realisations" sur ta page d'accueil
-                link: { label: "Voir le Portfolio", url: "{{ path('app_home') }}#realisations" }
+                link: { label: "Voir le Portfolio", url: "{{ path('app_realisation_index') }}" }
             };
         }
 
