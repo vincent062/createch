@@ -191,7 +191,7 @@
         // 3. LE GUIDE (Portfolio / Réalisations)
         if (lowerMsg.includes('réalisations') || lowerMsg.includes('exemples') || lowerMsg.includes('voir') || lowerMsg.includes('portfolio') || lowerMsg.includes('projet')) {
             return {
-                text: "Une image vaut mille mots ! J'ai rassemblé mes meilleures créations sur la page d'accueil.",
+                text: "Une image vaut mille mots ! J'ai rassemblé mes meilleures créations sur cette page.",
                 // Assure-toi d'avoir une section avec id="realisations" sur ta page d'accueil
                 link: { label: "Voir le Portfolio", url: "{{ path('app_realisation_index') }}" }
             };
