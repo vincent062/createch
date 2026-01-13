@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField; // <-- Changement ici (Textarea au lieu de TextEditor)
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 
 class PrestationCrudController extends AbstractCrudController
 {
@@ -21,8 +22,14 @@ class PrestationCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             
-            // ATTENTION : Utilisez bien 'titre' et non 'title'
             TextField::new('titre'),
+
+            // --- AJOUT DU PRIX ICI ---
+            MoneyField::new('prix')
+                ->setCurrency('EUR')
+                ->setStoredAsCents(false)
+                ->setLabel('Tarif (€)'),
+           
             
             // Configuration de l'image
             ImageField::new('image')

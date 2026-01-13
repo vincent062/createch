@@ -75,11 +75,32 @@
     </div>
 </div>
 
-{# --- 3. LE JAVASCRIPT (Juste pour l'animation) --- #}
+         /* --- CONFIGURATION DES SERVICES --- */
+         // On génère l'URL de base avec un "placeholder" qu'on remplacera par le vrai slug en JS
 <script>
+    const baseUrl = "{{ path('app_prestation_show', {'slug': 'PLACEHOLDER'}) }}";
+    
+    // Liste tes services ici (doit correspondre à ta BDD)
+    const servicesConfig = [
+        {
+            slug: 'site-vitrine', 
+            name: 'Site Vitrine',
+            keywords: ['vitrine', 'présentation', 'site web', 'internet']
+        },
+        {
+            slug: 'e-commerce', 
+            name: 'E-Commerce',
+            keywords: ['boutique', 'vente', 'ligne', 'shop', 'commerce']
+        },
+        {
+            slug: 'application-mobile', 
+            name: 'App Mobile',
+            keywords: ['mobile', 'app', 'android', 'ios', 'smartphone']
+        }
+    ];
+
     function toggleChat() {
         const chatWindow = document.getElementById('chat-window');
-        // On bascule entre scale-0 (caché) et scale-100 (visible)
         if (chatWindow.classList.contains('scale-0')) {
             chatWindow.classList.remove('scale-0');
             chatWindow.classList.add('scale-100');
@@ -90,60 +111,156 @@
     }
 
     function sendMessage(event) {
-        event.preventDefault(); // Empêche le rechargement de la page
+        event.preventDefault();
         const input = document.getElementById('chat-input');
         const message = input.value.trim();
         
         if (message) {
-            addMessage(message, 'end'); // Ajoute mon message (droite)
+            addMessage(message, 'end'); // Message utilisateur
             input.value = '';
-            
-            // Simulation de réponse automatique (Fake AI)
+
+            // 1. On montre que le robot réfléchit
             setTimeout(() => {
                 showTypingIndicator();
             }, 500);
-            
+
+            // 2. On analyse et on répond
             setTimeout(() => {
                 removeTypingIndicator();
-                addMessage("Je suis encore en formation 🧠, mais vous pouvez utiliser la page Contact pour écrire à Vincent !", 'start');
-            }, 2500);
+                
+                // C'est ICI qu'on appelle la nouvelle fonction cerveau
+                const smartResponse = analyzeMessage(message);
+                
+                addMessage(smartResponse.text, 'start');
+                
+                // Si le robot propose un lien (devis, service, etc.), on affiche le bouton
+                if (smartResponse.link) {
+                    addLinkButton(smartResponse.link.label, smartResponse.link.url);
+                }
+            }, 1500);
         }
     }
 
     function sendQuickReply(text) {
         addMessage(text, 'end');
-        setTimeout(() => {
-            showTypingIndicator();
-        }, 500);
+        setTimeout(() => showTypingIndicator(), 500);
         setTimeout(() => {
             removeTypingIndicator();
-            let response = "Intéressant ! Dites-m'en plus.";
-            if(text.includes('devis')) response = "Excellente idée ! Pour un devis précis, le formulaire de contact est le meilleur endroit.";
-            if(text.includes('services')) response = "Nous proposons 3 solutions phares : Site Vitrine, E-commerce et Application Mobile (iOS/Android). <br/> Mais aussi du référencement SEO, Maintenance Web, et du Dépannage Web.";
-            if(text.includes('humain')) response = "Vincent recevra votre message si vous passez par le formulaire de contact.";
             
-            addMessage(response, 'start');
-        }, 1500);
+            // Même chose pour les réponses rapides, on passe par le cerveau
+            const smartResponse = analyzeMessage(text);
+            
+            addMessage(smartResponse.text, 'start');
+            if (smartResponse.link) {
+                addLinkButton(smartResponse.link.label, smartResponse.link.url);
+            }
+        }, 1000);
+    }
+
+    // --- LE CERVEAU DU ROBOT (La fameuse fonction manquante) ---
+    function analyzeMessage(message) {
+        const lowerMsg = message.toLowerCase();
+
+        // 1. DÉTECTION DES SERVICES
+        for (const service of servicesConfig) {
+            if (service.keywords.some(keyword => lowerMsg.includes(keyword))) {
+                const finalUrl = baseUrl.replace('PLACEHOLDER', service.slug);
+                return {
+                    text: `Cela ressemble à un besoin pour notre service **${service.name}**. Souhaitez-vous voir les détails ?`,
+                    link: { label: `Voir l'offre ${service.name}`, url: finalUrl }
+                };
+            }
+        }
+
+        // AJOUT : LE MENU GÉNÉRAL (Mot-clé "services")
+        if (lowerMsg.includes('service') || lowerMsg.includes('prestation') || lowerMsg.includes('offre')) {
+            return {
+                text: "Nous avons 3 expertises principales : Site Vitrine, E-Commerce et Application Mobile. Souhaitez-vous voir la liste complète ?",
+                link: { label: "Voir tous nos services", url: "{{ path('app_prestation_index') }}" }
+            };
+        }
+        
+        // 2. LE COMMERCIAL (Prix / Devis)
+        if (lowerMsg.includes('prix') || lowerMsg.includes('tarif') || lowerMsg.includes('coût') || lowerMsg.includes('combien') || lowerMsg.includes('devis') || lowerMsg.includes('argent')) {
+            return {
+                text: "Chaque projet est unique ! Pour obtenir une estimation précise (et gratuite), le mieux est de m'en dire un peu plus via le formulaire.",
+                link: { label: "Demander un devis", url: "{{ path('app_contact') }}" }
+            };
+        }
+
+        // 3. LE GUIDE (Portfolio / Réalisations)
+        if (lowerMsg.includes('réalisations') || lowerMsg.includes('exemples') || lowerMsg.includes('voir') || lowerMsg.includes('portfolio') || lowerMsg.includes('projet')) {
+            return {
+                text: "Une image vaut mille mots ! J'ai rassemblé mes meilleures créations sur la page d'accueil.",
+                // Assure-toi d'avoir une section avec id="realisations" sur ta page d'accueil
+                link: { label: "Voir le Portfolio", url: "{{ path('app_home') }}#realisations" }
+            };
+        }
+
+        // 4. L'EXPERT TECH (Symfony vs WordPress)
+        if (lowerMsg.includes('wordpress') || lowerMsg.includes('wix') || lowerMsg.includes('shopify') || lowerMsg.includes('cms')) {
+            return {
+                text: "Chez Créa'Tech, je code sur mesure avec **Symfony**. C'est beaucoup plus rapide, sécurisé et évolutif que des solutions comme WordPress ou Wix."
+            };
+        }
+
+        // 5. LE FILTRE RH (Stage / Emploi)
+        if (lowerMsg.includes('stage') || lowerMsg.includes('stagiaire') || lowerMsg.includes('job') || lowerMsg.includes('alternance') || lowerMsg.includes('recrutement') || lowerMsg.includes('embauche')) {
+            return {
+                text: "C'est flatteur ! Je travaille actuellement en mode freelance. Vous pouvez tout de même envoyer votre CV via le contact pour mes archives."
+            };
+        }
+
+        // 6. MESSAGES GÉNÉRIQUES (Politesse)
+        if (lowerMsg.includes('bonjour') || lowerMsg.includes('salut') || lowerMsg.includes('hello')) {
+            return { text: "Bonjour ! 👋 Je suis SPARK, l'intelligence artificielle de Créa'Tech. Comment puis-je booster votre projet aujourd'hui ?" };
+        }
+        
+        if (lowerMsg.includes('humain') || lowerMsg.includes('personne') || lowerMsg.includes('vincent')) {
+            return { 
+                    text: "Je transmets le message à Vincent immédiatement ! Passez par le formulaire pour une réponse rapide.",
+                    link: { label: "Contacter Vincent", url: "{{ path('app_contact') }}" }
+            };
+        }
+
+        // 7. RÉPONSE PAR DÉFAUT
+        return { text: "Je suis encore en apprentissage 🧠. Pour cette question spécifique, je vous conseille d'écrire directement à Vincent." };
     }
 
     function addMessage(text, position) {
         const messagesDiv = document.getElementById('chat-messages');
         const bubbleColor = position === 'end' ? 'chat-bubble-secondary' : 'chat-bubble-primary';
-        const avatar = position === 'start' ? 
-            `<div class="chat-image avatar"><div class="w-8 rounded-full"><img src="{{ asset('img/robot.jpg.png') }}" /></div></div>` : 
-            '';
+        const avatar = position === 'start' ? `<div class="chat-image avatar"><div class="w-8 rounded-full"><img src="{{ asset('img/robot.jpg.png') }}" /></div></div>` : '';
+        
+        // Conversion du gras Markdown **texte** en HTML <b>texte</b>
+        const formattedText = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
 
         const html = `
             <div class="chat chat-${position} animate-fade-in-up">
                 ${avatar}
-                <div class="chat-bubble ${bubbleColor} text-sm shadow-md">${text}</div>
+                <div class="chat-bubble ${bubbleColor} text-sm shadow-md">${formattedText}</div>
             </div>
         `;
         messagesDiv.insertAdjacentHTML('beforeend', html);
-        messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll vers le bas
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
     }
 
-    // Indicateur de frappe "..."
+    // Nouvelle fonction pour ajouter les boutons (Devis, Voir le service, etc.)
+    function addLinkButton(label, url) {
+        const messagesDiv = document.getElementById('chat-messages');
+        const html = `
+            <div class="chat chat-start animate-fade-in-up">
+                <div class="chat-image avatar invisible"><div class="w-8"></div></div>
+                <a href="${url}" class="btn btn-sm btn-accent text-white mt-1 shadow-lg border-2 border-white/20">
+                    ${label} 
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 ml-1"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" /></svg>
+                </a>
+            </div>
+        `;
+        messagesDiv.insertAdjacentHTML('beforeend', html);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
     function showTypingIndicator() {
         const messagesDiv = document.getElementById('chat-messages');
         const html = `
@@ -162,7 +279,7 @@
         const indicator = document.getElementById('typing-indicator');
         if (indicator) indicator.remove();
     }
-</script>
+</script>  
 
 <style>
     /* Petite animation d'apparition des messages */

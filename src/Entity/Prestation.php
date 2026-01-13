@@ -29,6 +29,21 @@ class Prestation
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $contenu = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $prix = null;
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(?float $prix): static
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
