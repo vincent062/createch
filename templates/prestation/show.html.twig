@@ -2,6 +2,10 @@
 
 {% block title %}{{ prestation.titre }} - Créa'Tech{% endblock %}
 
+{% block description %}
+    Découvrez notre offre {{ prestation.titre }}. {{ prestation.descriptionCourte }}
+{% endblock %}
+
 {% block body %}
     {# --- HERO HEADER : Titre et Ambiance --- #}
     <div class="relative bg-base-200 py-20 overflow-hidden">

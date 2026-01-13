@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="fr" data-theme="halloween">
 <head>
-    
     <meta charset="UTF-8">
+    <title>{% block title %}Créa'Tech - Agence Web & Mobile{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    {# --- SEO ESSENTIEL --- #}
-    <title>{% block title %}Créa'Tech - Agence Web & Mobile{% endblock %}</title>
-    <meta name="description" content="Développement de sites web sur-mesure (Symfony), E-commerce et Applications Mobiles. Transformez votre vision en réalité numérique avec Créa'Tech.">
-    <meta name="author" content="Vincent - Créa'Tech">
+    {# --- AJOUT SEO : Description --- #}
+    <meta name="description" content="{% block description %}Agence de développement web et mobile. Création de sites vitrines, e-commerce et applications sur-mesure avec Symfony.{% endblock %}">
     
-    {# --- FAVICON (L'icône de l'onglet) --- #}
-    <link rel="icon" href="{{ asset('img/logo.jpeg') }}">
+    {# --- AJOUT SEO : Open Graph (Pour Facebook/LinkedIn/WhatsApp) --- #}
+    <meta property="og:title" content="{% block og_title %}{{ block('title') }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ block('description') }}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ absolute_url(asset('img/logo.jpeg')) }}{% endblock %}">
+    <meta property="og:type" content="website">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>🚀</text></svg>">
+    
 
     {# --- STYLES --- #}
     <script src="https://cdn.tailwindcss.com"></script>
@@ -101,7 +105,7 @@
                     {% if label == 'success' %}
                         <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                     {% else %}
-                         <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                     {% endif %}
                     
                     <span>{{ message }}</span>
