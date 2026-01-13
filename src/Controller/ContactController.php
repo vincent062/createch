@@ -31,14 +31,12 @@ class ContactController extends AbstractController
             // 2. Envoi de l'email 
             
             $email = (new Email())
-                ->from($contact->getEmail())        // L'expéditeur (le client)
-                ->to('contact@createch-wa.fr')      // LE DESTINATAIRE (TOI)
-                ->subject('Nouveau message de ' . $contact->getNom())
+                ->from('contact@createch-wa.fr')      // (autorisé par o2switch)
+                ->replyTo($contact->getEmail())       
+                ->to('contact@createch-wa.fr')
+                ->subject('Nouveau message de ' . $contact->getNom()) 
                 ->text($contact->getMessage())
                 ->html('<p>' . nl2br($contact->getMessage()) . '</p>');
-
-            $mailer->send($email);
-            
 
             // 3. Message de succès
             $this->addFlash('success', 'Votre message a bien été envoyé ! Nous vous répondrons très vite.');

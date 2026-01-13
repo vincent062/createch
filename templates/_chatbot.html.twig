@@ -75,7 +75,7 @@
     </div>
 </div>
 
-{# --- 3. LE JAVASCRIPT (Juste pour l'animation pour l'instant) --- #}
+{# --- 3. LE JAVASCRIPT (Juste pour l'animation) --- #}
 <script>
     function toggleChat() {
         const chatWindow = document.getElementById('chat-window');
@@ -119,9 +119,7 @@
             removeTypingIndicator();
             let response = "Intéressant ! Dites-m'en plus.";
             if(text.includes('devis')) response = "Excellente idée ! Pour un devis précis, le formulaire de contact est le meilleur endroit.";
-            // --- MODIFICATION ICI : On aligne avec vos 3 services ---
             if(text.includes('services')) response = "Nous proposons 3 solutions phares : Site Vitrine, E-commerce et Application Mobile (iOS/Android). <br/> Mais aussi du référencement SEO, Maintenance Web, et du Dépannage Web.";
-            // --------------------------------------------------------
             if(text.includes('humain')) response = "Vincent recevra votre message si vous passez par le formulaire de contact.";
             
             addMessage(response, 'start');
