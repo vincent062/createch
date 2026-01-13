@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'app_contact')]
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
@@ -27,10 +27,22 @@ class ContactController extends AbstractController
             $entityManager->persist($contact);
             $entityManager->flush();
 
-            // Message de succès (Flash message)
+            
+            // 2. Envoi de l'email 
+            
+            $email = (new Email())
+                ->from($contact->getEmail())        // L'expéditeur (le client)
+                ->to('contact@createch-wa.fr')      // LE DESTINATAIRE (TOI)
+                ->subject('Nouveau message de ' . $contact->getNom())
+                ->text($contact->getMessage())
+                ->html('<p>' . nl2br($contact->getMessage()) . '</p>');
+
+            $mailer->send($email);
+            
+
+            // 3. Message de succès
             $this->addFlash('success', 'Votre message a bien été envoyé ! Nous vous répondrons très vite.');
 
-            // On redirige vers la même page pour vider le formulaire (évite le renvoi si on actualise)
             return $this->redirectToRoute('app_contact');
         }
 
@@ -39,3 +51,4 @@ class ContactController extends AbstractController
         ]);
     }
 }
+
