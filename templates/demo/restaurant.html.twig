@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Gourmet - Restaurant Gastronomique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap');
+        .font-heading { family: 'Playfair Display', serif; }
+        .font-body { family: 'Lato', sans-serif; }
+    </style>
+</head>
+<body class="font-body text-gray-300 bg-stone-950 antialiased selection:bg-amber-700 selection:text-white">
+
+    <nav class="absolute top-0 w-full z-50 px-6 py-6 flex justify-between items-center">
+        <div class="text-2xl font-heading font-bold text-amber-50 tracking-widest uppercase border-2 border-amber-500/50 p-2">
+            Le Gourmet
+        </div>
+        <div class="hidden md:flex gap-8 text-sm uppercase tracking-widest font-bold text-amber-50/80">
+            <a href="#" class="hover:text-amber-500 transition-colors">La Carte</a>
+            <a href="#" class="hover:text-amber-500 transition-colors">Le Chef</a>
+            <a href="#" class="text-amber-500">Réserver</a>
+        </div>
+    </nav>
+
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-black/60 z-10"></div>
+        <img src="{{ asset('img/restaurant.png') }}" 
+            class="absolute inset-0 w-full h-full object-cover animate-pulse-slow" 
+            style="animation-duration: 10s;"
+            alt="Plat signature">
+        
+        <div class="relative z-20 text-center px-4">
+            <p class="text-amber-500 uppercase tracking-[0.3em] text-sm mb-4 animate-fade-in-up">Cuisine d'Exception</p>
+            <h1 class="text-5xl md:text-8xl font-heading text-white mb-8 italic">
+                L'Art du Goût
+            </h1>
+            <a href="#menu" class="inline-block px-8 py-4 bg-amber-600 text-white font-bold uppercase tracking-widest hover:bg-amber-700 transition-all duration-300 border border-amber-500">
+                Découvrir le Menu
+            </a>
+        </div>
+    </header>
+
+    <section class="py-20 px-6 md:px-20 bg-stone-900">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div class="space-y-6">
+                <h2 class="text-4xl font-heading text-amber-50">Une expérience <span class="text-amber-500 italic">inoubliable</span></h2>
+                <p class="text-lg leading-relaxed text-stone-400">
+                    Niché au cœur de la ville, Le Gourmet réinvente la gastronomie française avec une touche de modernité. Nos produits sont sourcés localement, respectant le rythme des saisons.
+                </p>
+                <div class="w-20 h-1 bg-amber-600"></div>
+            </div>
+            <div class="relative">
+                <div class="absolute -inset-4 border border-amber-500/30"></div>
+                <div class="bg-stone-800 h-96 w-full flex items-center justify-center text-stone-600">
+                    [Photo du Chef ici]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black py-12 text-center border-t border-stone-800">
+        <p class="font-heading text-2xl text-amber-500 mb-4">Le Gourmet</p>
+        <p class="text-stone-500 text-sm uppercase tracking-widest">
+            12 Avenue des Champs, Paris • 01 23 45 67 89
+        </p>
+        <p class="text-stone-700 text-xs mt-8">
+            © Site démo réalisé par Créa'Tech
+        </p>
+    </footer>
+
+</body>
+</html>

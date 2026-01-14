@@ -1,60 +1,62 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nos Services - Créa'Tech{% endblock %}
+{% block title %}Notre Portfolio - Créa'Tech{% endblock %}
 
 {% block body %}
-    <div class="bg-base-200 min-h-screen py-12">
-        <div class="container mx-auto px-4 max-w-7xl">
-            
-            {# En-tête de la page #}
-            <div class="text-center mb-16">
-                <h1 class="text-4xl md:text-5xl font-bold mb-6">Nos Solutions Digitales</h1>
-                <p class="text-xl text-base-content/70 max-w-2xl mx-auto">
-                    Découvrez l'ensemble de nos expertises pour propulser votre activité.
-                </p>
+    <div class="container mx-auto px-4 py-12">
+        <div class="text-center mb-16 animate-fade-in-up">
+            <h1 class="text-4xl md:text-5xl font-bold font-heading mb-4 text-secondary">
+                Nos <span class="text-primary">Réalisations</span>
+            </h1>
+            <p class="text-lg opacity-70 max-w-2xl mx-auto">
+                Découvrez les projets que nous avons conçus pour nos clients.
+                Sites vitrines, e-commerce ou applications sur-mesure.
+            </p>
+        </div>
+
+        {% if realisations is empty %}
+            <div class="text-center py-20 bg-base-200 rounded-box">
+                <p class="text-xl opacity-60">Nos projets seront bientôt affichés ici ! 🚀</p>
+                <a href="{{ path('app_contact') }}" class="btn btn-primary mt-4">Démarrer votre projet</a>
             </div>
-
-            {# Grille des services #}
+        {% else %}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                {% for prestation in prestations %}
-                    <div class="card bg-base-100 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-base-300 overflow-hidden group">
-                        
-                        {# Image #}
-                        {% if prestation.image %}
-                            <figure class="h-56 w-full bg-base-300 relative overflow-hidden">
-                                {% if 'http' in prestation.image %}
-                                    <img src="{{ prestation.image }}" alt="{{ prestation.titre }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                                {% else %}
-                                    <img src="{{ asset('uploads/prestations/' ~ prestation.image) }}" alt="{{ prestation.titre }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                                {% endif %}
-                                <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
-                            </figure>
-                        {% endif %}
-
+                {% for realisation in realisations %}
+                    <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-base-200">
+                        <figure class="px-4 pt-4">
+                            {% if realisation.image %}
+                                <img src="{{ asset('uploads/realisations/' ~ realisation.image) }}" alt="{{ realisation.titre }}" class="rounded-xl h-48 w-full object-cover" />
+                            {% else %}
+                                <div class="h-48 w-full bg-neutral text-neutral-content grid place-items-center rounded-xl">
+                                    <span class="text-4xl">🖼️</span>
+                                </div>
+                            {% endif %}
+                        </figure>
                         <div class="card-body">
-                            <h2 class="card-title text-2xl text-primary mb-2">
-                                {{ prestation.titre }}
-                            </h2>
-                            <p class="mb-6 text-base-content/70 line-clamp-3">
-                                {{ prestation.descriptionCourte }}
+                            <h2 class="card-title text-secondary">{{ realisation.titre }}</h2>
+                            <p class="text-sm opacity-70 line-clamp-3">
+                                {{ realisation.description|striptags }}
                             </p>
                             
-                            <div class="card-actions justify-end mt-auto pt-4 border-t border-base-200">
-                                <a href="{{ path('app_prestation_show', {slug: prestation.slug}) }}" class="btn btn-primary btn-outline gap-2 group-hover:btn-active">
-                                    En savoir plus
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                                </a>
+                            <div class="card-actions justify-end mt-4 items-center">
+                                {# --- CORRECTION ICI : Utilisation de lienWeb --- #}
+                                {% if realisation.lienWeb %}
+                                    {# CAS 1 : C'est un vrai site avec une URL #}
+                                    <a href="{{ realisation.lienWeb }}" target="_blank" class="btn btn-sm btn-outline btn-primary">
+                                        Visiter le site
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-1"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+                                    </a>
+                                {% else %}
+                                    {# CAS 2 : Pas de lien, c'est un Concept #}
+                                    <div class="badge badge-outline badge-secondary p-3" title="Démonstration graphique">
+                                        ✨ Concept Design
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
-                {% else %}
-                    <div class="col-span-full text-center py-10">
-                        <div class="text-3xl opacity-50">Aucun service pour le moment.</div>
-                    </div>
                 {% endfor %}
-
             </div>
-        </div>
+        {% endif %}
     </div>
 {% endblock %}
