@@ -9,7 +9,8 @@
                 Nos <span class="text-primary">Réalisations</span>
             </h1>
             <p class="text-lg opacity-70 max-w-2xl mx-auto">
-                Découvrez les projets que nous avons conçus pour nos clients. Sites vitrines, e-commerce ou applications sur-mesure.
+                Découvrez les projets que nous avons conçus pour nos clients.
+                Sites vitrines, e-commerce ou applications sur-mesure.
             </p>
         </div>
 
@@ -23,7 +24,6 @@
                 {% for realisation in realisations %}
                     <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-base-200">
                         <figure class="px-4 pt-4">
-                            {# Vérifie bien que tu as un champ 'image' dans ton entité Realisation #}
                             {% if realisation.image %}
                                 <img src="{{ asset('uploads/realisations/' ~ realisation.image) }}" alt="{{ realisation.titre }}" class="rounded-xl h-48 w-full object-cover" />
                             {% else %}
@@ -34,16 +34,21 @@
                         </figure>
                         <div class="card-body">
                             <h2 class="card-title text-secondary">{{ realisation.titre }}</h2>
-                            <p class="text-sm opacity-70 line-clamp-3">
-                                {{ realisation.description|striptags }}
-                            </p>
-                            <div class="card-actions justify-end mt-4">
-                                {# Si tu as un champ 'lien' ou 'url' vers le site du client #}
-                                {% if realisation.lien is defined and realisation.lien %}
-                                    <a href="{{ realisation.lien }}" target="_blank" class="btn btn-sm btn-outline btn-primary">
+                            {# <p class="text-sm opacity-70 line-clamp-3"> #}
+                                {# {{ realisation.description|striptags }} #}
+                            {# </p> #}
+                            
+                            <div class="card-actions justify-end mt-4 items-center">
+                                {# --- CORRECTION : Utilisation de lienWeb --- #}
+                                {% if realisation.lienWeb %}
+                                    <a href="{{ realisation.lienWeb }}" target="_blank" class="btn btn-sm btn-outline btn-primary">
                                         Visiter le site
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-1"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
                                     </a>
+                                {% else %}
+                                    <div class="badge badge-outline badge-secondary p-3" title="Démonstration graphique">
+                                        ✨ Concept Design
+                                    </div>
                                 {% endif %}
                             </div>
                         </div>

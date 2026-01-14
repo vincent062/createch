@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier Coton & Soie | E-Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sage': '#8A9A5B',
+                        'cream': '#F9F7F2',
+                        'charcoal': '#2C3E50'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-cream text-charcoal font-sans antialiased">
+
+    <nav class="flex justify-between items-center px-8 py-6 bg-white shadow-sm sticky top-0 z-40">
+        <div class="text-2xl font-bold tracking-tighter uppercase">Coton & Soie</div>
+        <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest text-gray-500">
+            <a href="#" class="hover:text-sage transition">Nouveautés</a>
+            <a href="#" class="hover:text-sage transition">Senteurs</a>
+            <a href="#" class="hover:text-sage transition">Maison</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <span class="text-sm font-bold">Panier (0)</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+        </div>
+    </nav>
+
+    <header class="relative h-[70vh] flex items-center justify-center">
+        <img src="{{ asset('img/Gemini_Generated_Image_caf6x3caf6x3caf6.png') }}" 
+             class="absolute inset-0 w-full h-full object-cover" 
+             alt="Ambiance Boutique">
+        
+        <div class="relative z-10 bg-white/90 backdrop-blur-sm p-12 text-center max-w-lg shadow-xl">
+            <h1 class="text-4xl font-light mb-4">L'Élégance Naturelle</h1>
+            <p class="text-gray-600 mb-8 italic">Une collection pensée pour votre bien-être intérieur.</p>
+            <a href="#shop" class="bg-sage text-white px-8 py-3 uppercase text-xs tracking-[0.2em] hover:bg-green-700 transition">
+                Voir la Collection
+            </a>
+        </div>
+    </header>
+
+    <section id="shop" class="py-20 px-8 max-w-7xl mx-auto">
+        <h2 class="text-center text-3xl font-light mb-16 uppercase tracking-widest">Nos Favoris</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div class="group cursor-pointer">
+                <div class="h-96 bg-gray-200 overflow-hidden relative mb-4">
+                    <img src="https://images.unsplash.com/photo-1608571423902-eed4a5e84e43?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Bougie">
+                    <div class="absolute bottom-4 right-4 bg-white p-2 rounded-full shadow hover:bg-sage hover:text-white transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                    </div>
+                </div>
+                <h3 class="text-lg font-medium">Bougie "Matin Calme"</h3>
+                <p class="text-gray-500 text-sm">Cire de soja naturelle</p>
+                <p class="mt-2 font-bold text-sage">24.00 €</p>
+            </div>
+
+            <div class="group cursor-pointer">
+                <div class="h-96 bg-gray-200 overflow-hidden relative mb-4">
+                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdd403cc2?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Crème">
+                    <div class="absolute top-4 left-4 bg-sage text-white text-xs px-2 py-1 uppercase">Best Seller</div>
+                </div>
+                <h3 class="text-lg font-medium">Crème Mains Karité</h3>
+                <p class="text-gray-500 text-sm">Hydratation intense</p>
+                <p class="mt-2 font-bold text-sage">18.50 €</p>
+            </div>
+
+            <div class="group cursor-pointer">
+                <div class="h-96 bg-gray-200 overflow-hidden relative mb-4">
+                    <img src="https://images.unsplash.com/photo-1616401784845-180882ba9ba8?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Linge">
+                </div>
+                <h3 class="text-lg font-medium">Brume d'Oreiller</h3>
+                <p class="text-gray-500 text-sm">Lavande & Camomille</p>
+                <p class="mt-2 font-bold text-sage">29.00 €</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white border-t py-12 text-center text-sm text-gray-400">
+        <p>© 2024 Atelier Coton & Soie • Fait avec passion</p>
+    </footer>
+
+    <a href="{{ path('app_realisation_index') }}" 
+        class="fixed bottom-6 right-6 z-50 bg-white text-black px-4 py-2 rounded-full font-bold shadow-2xl hover:bg-gray-200 transition-transform hover:scale-105 flex items-center gap-2 border border-gray-300">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+        </svg>
+        Retour Portfolio
+    </a>
+
+</body>
+</html>

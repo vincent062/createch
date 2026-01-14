@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRON PULSE | Salle de Sport & Crossfit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neon-red': '#FF2E63',
+                        'neon-blue': '#08D9D6',
+                        'dark-bg': '#1A1A1D'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark-bg text-white font-sans antialiased">
+
+    <nav class="flex justify-between items-center px-8 py-6 sticky top-0 bg-dark-bg/90 backdrop-blur z-50 border-b border-gray-800">
+        <div class="text-2xl font-black italic tracking-tighter text-neon-red">IRON PULSE</div>
+        <div class="hidden md:flex space-x-8 font-bold uppercase text-sm tracking-widest text-gray-400">
+            <a href="#" class="hover:text-white transition">Le Club</a>
+            <a href="#" class="hover:text-white transition">Planning</a>
+            <a href="#" class="hover:text-white transition">Coachs</a>
+        </div>
+        <a href="#" class="bg-white text-black font-black px-6 py-2 uppercase transform hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(255,46,99,1)] transition-all">
+            S'inscrire
+        </a>
+    </nav>
+
+    <header class="relative h-[85vh] flex items-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+             <img src="{{ asset('img/gym.png') }}" class="w-full h-full object-cover opacity-50" alt="Salle de sport">
+            <div class="absolute inset-0 bg-gradient-to-r from-dark-bg via-dark-bg/80 to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 px-8 md:px-20 max-w-3xl">
+            <h1 class="text-6xl md:text-8xl font-black italic uppercase leading-none mb-6">
+                Forge <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-red to-purple-600">Ton Corps</span>
+            </h1>
+            <p class="text-xl text-gray-300 mb-8 border-l-4 border-neon-blue pl-6">
+                Ouvert 24h/24 • Coaching Personnalisé • Zone Crossfit <br>
+                Rejoignez l'élite du fitness dès aujourd'hui.
+            </p>
+            <div class="flex gap-4">
+                <button class="bg-neon-red text-white font-bold px-8 py-4 uppercase hover:bg-red-600 transition">Séance d'essai gratuite</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="bg-black py-12 border-y border-gray-800">
+        <div class="container mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+                <div class="text-4xl font-black text-neon-blue">1200m²</div>
+                <div class="text-gray-500 uppercase text-xs mt-2">D'espace pur</div>
+            </div>
+            <div>
+                <div class="text-4xl font-black text-neon-blue">24/7</div>
+                <div class="text-gray-500 uppercase text-xs mt-2">Accès illimité</div>
+            </div>
+            <div>
+                <div class="text-4xl font-black text-neon-blue">35+</div>
+                <div class="text-gray-500 uppercase text-xs mt-2">Cours / Semaine</div>
+            </div>
+            <div>
+                <div class="text-4xl font-black text-neon-blue">12</div>
+                <div class="text-gray-500 uppercase text-xs mt-2">Coachs experts</div>
+            </div>
+        </div>
+    </div>
+
+    <section class="py-20 px-8 bg-zinc-900">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-4xl font-black uppercase italic mb-12 text-center">Planning du jour</h2>
+            <div class="space-y-4">
+                <div class="flex flex-col md:flex-row items-center bg-dark-bg p-6 border border-gray-800 hover:border-neon-red transition group cursor-pointer">
+                    <div class="text-2xl font-bold text-gray-500 w-32">17:30</div>
+                    <div class="flex-grow">
+                        <h3 class="text-xl font-bold uppercase group-hover:text-neon-red transition">Crossfit WOD</h3>
+                        <p class="text-sm text-gray-400">Salle Principale • Coach Alex</p>
+                    </div>
+                    <button class="mt-4 md:mt-0 px-6 py-2 border border-white text-xs uppercase font-bold hover:bg-white hover:text-black transition">Réserver</button>
+                </div>
+                <div class="flex flex-col md:flex-row items-center bg-dark-bg p-6 border border-gray-800 hover:border-neon-blue transition group cursor-pointer">
+                    <div class="text-2xl font-bold text-gray-500 w-32">18:45</div>
+                    <div class="flex-grow">
+                        <h3 class="text-xl font-bold uppercase group-hover:text-neon-blue transition">Yoga Power</h3>
+                        <p class="text-sm text-gray-400">Studio Zen • Coach Sarah</p>
+                    </div>
+                    <button class="mt-4 md:mt-0 px-6 py-2 bg-gray-800 text-gray-500 text-xs uppercase font-bold cursor-not-allowed">Complet</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <a href="{{ path('app_realisation_index') }}" 
+        class="fixed bottom-6 right-6 z-50 bg-white text-black px-4 py-2 rounded-full font-bold shadow-2xl hover:bg-gray-200 transition-transform hover:scale-105 flex items-center gap-2 border-2 border-neon-red">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+        </svg>
+        Retour Portfolio
+    </a>
+
+</body>
+</html>
