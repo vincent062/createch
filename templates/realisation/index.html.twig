@@ -33,25 +33,34 @@
                             {% endif %}
                         </figure>
                         <div class="card-body">
-                            <h2 class="card-title text-secondary">{{ realisation.titre }}</h2>
-                            {# <p class="text-sm opacity-70 line-clamp-3"> #}
-                                {# {{ realisation.description|striptags }} #}
-                            {# </p> #}
-                            
-                            <div class="card-actions justify-end mt-4 items-center">
-                                {# --- CORRECTION : Utilisation de lienWeb --- #}
-                                {% if realisation.lienWeb %}
-                                    <a href="{{ realisation.lienWeb }}" target="_blank" class="btn btn-sm btn-outline btn-primary">
-                                        Visiter le site
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-1"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
-                                    </a>
-                                {% else %}
-                                    <div class="badge badge-outline badge-secondary p-3" title="Démonstration graphique">
-                                        ✨ Concept Design
-                                    </div>
-                                {% endif %}
+    <h2 class="card-title text-secondary mb-1">{{ realisation.titre }}</h2>
+    
+    {# --- LE NOUVEAU BADGE CLIENT --- #}
+    <div class="mb-4">
+        {% if realisation.client %}
+            <span class="badge badge-ghost text-xs font-bold uppercase tracking-wider">
+                👤 Client : {{ realisation.client }}
+            </span>
+        {% else %}
+            <span class="badge badge-ghost text-xs font-bold uppercase tracking-wider">
+                🚀 Projet Personnel
+            </span>
+        {% endif %}
+    </div>
+    
+                    <div class="card-actions justify-end mt-auto items-center">
+                        {% if realisation.lienWeb %}
+                            <a href="{{ realisation.lienWeb }}" target="_blank" class="btn btn-sm btn-outline btn-primary">
+                                Visiter le site
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-1"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+                            </a>
+                        {% else %}
+                            <div class="badge badge-outline badge-secondary p-3" title="Démonstration graphique">
+                                ✨ Concept Design
                             </div>
-                        </div>
+                        {% endif %}
+                    </div>
+</div>
                     </div>
                 {% endfor %}
             </div>

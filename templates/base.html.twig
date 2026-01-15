@@ -28,6 +28,7 @@
 <body class="flex flex-col min-h-screen">
 
     {# --- BARRE DE NAVIGATION --- #}
+{# --- BARRE DE NAVIGATION --- #}
     <div class="navbar bg-base-100 shadow-sm fixed top-0 z-50 px-4 md:px-8">
         <div class="navbar-start">
             <div class="dropdown">
@@ -38,13 +39,13 @@
                 <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                     <li><a href="{{ path('app_home') }}">Accueil</a></li>
                     <li><a href="{{ path('app_prestation_index') }}">Nos Services</a></li>
+                    <li><a href="{{ path('app_realisation_index') }}">Nos Réalisations</a></li>
                     <li><a href="{{ path('app_contact') }}">Contact</a></li>
                 </ul>
             </div>
             
             {# Logo + Nom de l'agence #}
             <a href="{{ path('app_home') }}" class="btn btn-ghost text-xl font-bold tracking-tight text-primary flex items-center gap-3">
-                {# MODIFICATION ICI : Ajout du cercle (ring) autour du logo #}
                 <div class="avatar">
                     <div class="w-9 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                         <img src="{{ asset('img/logo.jpeg') }}" alt="Logo" />
@@ -59,43 +60,21 @@
             <ul class="menu menu-horizontal px-1 font-medium">
                 <li><a href="{{ path('app_home') }}">Accueil</a></li>
                 <li><a href="{{ path('app_prestation_index') }}">Nos Services</a></li>
+                <li><a href="{{ path('app_realisation_index') }}">Nos Réalisations</a></li>
                 <li><a href="{{ path('app_contact') }}">Contact</a></li>
             </ul>
         </div>
         
         <div class="navbar-end">
-            {# Bouton Admin #}
-            {% if app.user %}
-                <a href="{{ path('admin') }}" class="btn btn-secondary btn-sm font normal">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                    Admin
-                </a>
-            {% else %}
-            {# templates/base.html.twig #}
-
-{# Si je suis connecté, je vois un bouton clair "Retour Admin" #}
-{% if app.user %}
-    <li>
-        <a href="{{ path('admin') }}" class="btn btn-sm btn-primary font-bold">
-            Retour Admin
-        </a>
-    </li>
-
-{# Si je ne suis PAS connecté (Visiteur) #}
-{% else %}
-    <li>
-        {# Bouton "Fantôme" : 3 traits, quasi invisibles #}
-        <a href="{{ path('admin') }}" class="btn btn-ghost btn-circle btn-sm opacity-30 hover:opacity-100 transition-opacity" title="Accès Admin">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-        </a>
-    </li>
-{% endif %}
-            {% endif %}
+            {# C'EST ICI QUE NOUS AVONS SIMPLIFIÉ #}
+            {# Plus de conditions IF/ENDIF complexes, juste le bouton #}
+            <a href="{{ path('admin') }}" class="btn btn-ghost btn-circle" title="Administration">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </a>
         </div>
     </div>
-
     {# --- CONTENU DE LA PAGE --- #}
     <div class="pt-16 flex-grow container mx-auto px-4">
     {% for label, messages in app.flashes %}

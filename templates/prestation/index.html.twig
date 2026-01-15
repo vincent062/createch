@@ -1,62 +1,94 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Notre Portfolio - Créa'Tech{% endblock %}
+{% block title %}Nos Services - Créa'Tech{% endblock %}
 
 {% block body %}
     <div class="container mx-auto px-4 py-12">
+        
+        {# --- EN-TÊTE --- #}
         <div class="text-center mb-16 animate-fade-in-up">
             <h1 class="text-4xl md:text-5xl font-bold font-heading mb-4 text-secondary">
-                Nos <span class="text-primary">Réalisations</span>
+                Nos <span class="text-primary">Services</span>
             </h1>
             <p class="text-lg opacity-70 max-w-2xl mx-auto">
-                Découvrez les projets que nous avons conçus pour nos clients.
-                Sites vitrines, e-commerce ou applications sur-mesure.
+                Des solutions digitales sur-mesure pour propulser votre activité.
             </p>
         </div>
 
-        {% if realisations is empty %}
-            <div class="text-center py-20 bg-base-200 rounded-box">
-                <p class="text-xl opacity-60">Nos projets seront bientôt affichés ici ! 🚀</p>
-                <a href="{{ path('app_contact') }}" class="btn btn-primary mt-4">Démarrer votre projet</a>
+        {# --- DÉBUT DE LA CONDITION PRINCIPALE --- #}
+        {% if prestations is empty %}
+            
+            {# CAS 1 : Pas de prestations #}
+            <div class="text-center py-20 bg-base-200 rounded-box shadow-inner">
+                <p class="text-xl opacity-60">🚀 Nos offres arrivent très bientôt !</p>
+                <a href="{{ path('app_contact') }}" class="btn btn-primary mt-6">Nous contacter</a>
             </div>
+
         {% else %}
+            
+            {# CAS 2 : Il y a des prestations (Affichage de la grille) #}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {% for realisation in realisations %}
-                    <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-base-200">
-                        <figure class="px-4 pt-4">
-                            {% if realisation.image %}
-                                <img src="{{ asset('uploads/realisations/' ~ realisation.image) }}" alt="{{ realisation.titre }}" class="rounded-xl h-48 w-full object-cover" />
-                            {% else %}
-                                <div class="h-48 w-full bg-neutral text-neutral-content grid place-items-center rounded-xl">
-                                    <span class="text-4xl">🖼️</span>
-                                </div>
-                            {% endif %}
-                        </figure>
-                        <div class="card-body">
-                            <h2 class="card-title text-secondary">{{ realisation.titre }}</h2>
-                            <p class="text-sm opacity-70 line-clamp-3">
-                                {{ realisation.description|striptags }}
-                            </p>
+                
+                {% for prestation in prestations %}
+                    <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-base-200 flex flex-col h-full">
+                        
+                        <div class="card-body flex-grow">
+                            <h2 class="card-title text-2xl text-secondary mb-2 min-h-[4rem] items-end ">
+                                {{ prestation.titre }}
+                            </h2>
                             
-                            <div class="card-actions justify-end mt-4 items-center">
-                                {# --- CORRECTION ICI : Utilisation de lienWeb --- #}
-                                {% if realisation.lienWeb %}
-                                    {# CAS 1 : C'est un vrai site avec une URL #}
-                                    <a href="{{ realisation.lienWeb }}" target="_blank" class="btn btn-sm btn-outline btn-primary">
-                                        Visiter le site
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-1"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
-                                    </a>
-                                {% else %}
-                                    {# CAS 2 : Pas de lien, c'est un Concept #}
-                                    <div class="badge badge-outline badge-secondary p-3" title="Démonstration graphique">
-                                        ✨ Concept Design
-                                    </div>
-                                {% endif %}
+                            <div class="opacity-80 mb-6 text-sm leading-relaxed line-clamp-3 min-h-[5rem]">
+                                {{ prestation.descriptionCourte }}
+                            </div>
+
+                            {# --- ZONE IMAGES (Gestion des 6 cas) --- #}
+                            <figure class="px-4 pt-4">
+                                <div class="h-48 w-full rounded-xl overflow-hidden border border-base-200 relative group">
+                                    
+                                    {% if loop.index == 1 %}
+                                        <img src="{{ asset('/img/sitevitrine.png') }}" alt="{{ prestation.titre }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                    
+                                    {% elseif loop.index == 2 %}
+                                        <img src="{{ asset('/img/boutiqueecommerce.png') }}" alt="{{ prestation.titre }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                    
+                                    {% elseif loop.index == 3 %}
+                                        <img src="{{ asset('/img/applicationmobile.png') }}" alt="{{ prestation.titre }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+
+                                    {% elseif loop.index == 4 %}
+                                        <img src="{{ asset('/img/seo.png') }}" alt="{{ prestation.titre }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+
+                                    {% elseif loop.index == 5 %}
+                                        <img src="{{ asset('/img/maintenanceweb.png') }}" alt="{{ prestation.titre }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+
+                                    {% elseif loop.index == 6 %}
+                                        <img src="{{ asset('/img/depannage.png') }}" alt="{{ prestation.titre }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                    
+                                    {% else %}
+                                        <img src="{{ asset('images/default.jpg') }}" alt="Default" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                    {% endif %} 
+                                    {# ^^^ Ce endif ferme la condition des images ^^^ #}
+
+                                </div>
+                            </figure>
+
+                            <div class="card-actions justify-end items-center mt-auto border-t border-base-200 pt-4 w-full">
+                                <a href="{{ path('app_prestation_show', {'slug': prestation.slug}) }}" class="btn btn-sm btn-ghost text-primary">
+                                    En savoir plus
+                                </a>
+                                <a href="{{ path('app_contact') }}" class="btn btn-sm btn-primary">
+                                    Commander
+                                </a>
                             </div>
                         </div>
                     </div>
-                {% endfor %}
+                {% endfor %} 
+                {# ^^^ Ce endfor ferme la boucle des cartes ^^^ #}
+
             </div>
-        {% endif %}
+            
+        {% endif %} 
+        {# ^^^ Ce endif est CRUCIAL (ferme le "if prestations is empty") ^^^ #}
+        
     </div>
-{% endblock %}
+{% endblock %} 
+{# ^^^ Ce endblock est CRUCIAL (ferme le block body) ^^^ #}

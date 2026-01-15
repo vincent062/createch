@@ -21,13 +21,15 @@ class RealisationCrudController extends AbstractCrudController
     {
         return [
             TextField::new('titre'),
-            
-            // ICI : Le champ magique qui génère l'URL automatiquement
+
+            TextField::new('client')
+                ->setLabel('Nom du Client')
+                ->setFormTypeOption('attr.placeholder','Ex: Restaurent Le Gourmet ou Projet Perso')
+                ->setRequired(false),
+            //Génère l'URL automatiquement
             SlugField::new('slug')
                 ->setTargetFieldName('titre')
-                ->hideOnIndex(), 
-
-            TextEditorField::new('description'),
+                ->hideOnIndex(),    
             
             ImageField::new('image')
                 ->setBasePath('uploads/realisations')

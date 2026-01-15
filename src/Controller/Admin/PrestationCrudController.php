@@ -6,7 +6,7 @@ use App\Entity\Prestation;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField; // <-- Changement ici (Textarea au lieu de TextEditor)
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField; 
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 
@@ -40,7 +40,7 @@ class PrestationCrudController extends AbstractCrudController
 
             TextField::new('slug')->setHelp('Laissez vide pour générer automatiquement'),
             TextField::new('description_courte'),
-            // C'est ICI que ça change : On permet de coller du code HTML brut
+            // Permet de coller du code HTML brut
             TextareaField::new('contenu')->renderAsHtml(),
         ];
     }

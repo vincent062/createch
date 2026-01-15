@@ -17,7 +17,7 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        // C'est CETTE ligne qui fait le lien avec ton design HTML/CSS
+        // Fait le lien avec le design HTML/CSS
         return $this->render('admin/dashboard.html.twig');
     }
 

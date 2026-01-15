@@ -71,52 +71,66 @@
                 <p class="text-gray-500">Tout ce dont vous avez besoin pour réussir en ligne.</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+{# ... Début de la section Services ... #}
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    
+    {% for prestation in prestations %}
+        <div class="card bg-base-200 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-base-300">
+            
+            <figure class="px-4 pt-4">
+{# C'est ici que tu choisis tes images manuellement #}
+                {% if loop.index == 1 %}
+                {# IMAGE POUR LA CARTE 1 #}
+                    <img src="{{ asset('/img/sitevitrine.png') }}" alt="Vitrine" class="rounded-xl h-48 w-full object-cover border border-base-content/5" />
                 
-                {# On boucle sur les prestations de la base de données #}
-                {# templates/home/index.html.twig #}
-
-{% for prestation in prestations %}
-    <div class="card bg-base-200 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-base-300">
-        <div class="card-body">
-            
-            {# --- ZONE ICONE (Dynamique selon le titre) --- #}
-            <div class="mb-4">
-                {% if 'Mobile' in prestation.titre or 'App' in prestation.titre %}
-                    {# Icône MOBILE (Smartphone) #}
-                    <div class="p-3 bg-primary/10 rounded-xl w-fit">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-primary">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5h3a2.25 2.25 0 0 1 2.25 2.25v13.5a2.25 2.25 0 0 1-2.25 2.25h-3a2.25 2.25 0 0 1-2.25-2.25V3.75a2.25 2.25 0 0 1 2.25-2.25ZM12 18v.01" />
-                        </svg>
-                    </div>
+                {% elseif loop.index == 2 %}
+                {# IMAGE POUR LA CARTE 2 #}
+                    <img src="{{ asset('/img/boutiqueecommerce.png') }}" alt="E-commerce" class="rounded-xl h-48 w-full object-cover border border-base-content/5" />
+                
+                {% elseif loop.index == 3 %}
+                {# IMAGE POUR LA CARTE 3 #}
+                    <img src="{{ asset('/img/applicationmobile.png') }}" alt="Mobile" class="rounded-xl h-48 w-full object-cover border border-base-content/5" />
+                
                 {% else %}
-                    {# Icône PAR DÉFAUT (Ordinateur / Web) #}
-                    <div class="p-3 bg-secondary/10 rounded-xl w-fit">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-secondary">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m-9-12V15a2.25 2.25 0 0 0 2.25 2.25h9A2.25 2.25 0 0 0 19.5 15V5.25m-9-12h9A2.25 2.25 0 0 1 21 7.5v7.5a2.25 2.25 0 0 1-2.25 2.25h-9a2.25 2.25 0 0 1-2.25-2.25v-7.5a2.25 2.25 0 0 1 2.25-2.25Z" />
-                        </svg>
-                    </div>
+                {# IMAGE DE SECOURS (Si jamais tu ajoutes une 4ème prestation un jour) #}
+                    <img src="{{ asset('images/default.jpg') }}" alt="Defaut" class="rounded-xl h-48 w-full object-cover border border-base-content/5" />
                 {% endif %}
-            </div>
+                
+            </figure>
 
-            <h2 class="card-title text-base-content mb-2">{{ prestation.titre }}</h2>
-            <p class="mb-6 text-base-content/70">{{ prestation.descriptionCourte }}</p>
-            
-            <div class="card-actions justify-end mt-auto">
-                <a href="{{ path('app_prestation_show', {slug: prestation.slug}) }}" class="btn btn-sm btn-outline btn-primary group">
-                    En savoir plus 
-                    <span class="group-hover:translate-x-1 transition-transform">→</span>
-                </a>
+            <div class="card-body">
+                
+                {# --- 2. TITRE & DESCRIPTION --- #}
+                <h2 class="card-title text-base-content mb-2">
+                    {{ prestation.titre }}
+                    {# Petit badge optionnel si c'est une app #}
+                    {% if 'Mobile' in prestation.titre or 'App' in prestation.titre %}
+                        <div class="badge badge-secondary badge-outline text-xs">Mobile</div>
+                    {% endif %}
+                </h2>
+
+                <p class="mb-6 text-base-content/70 text-sm">
+                    {{ prestation.descriptionCourte }}
+                </p>
+                
+                {# --- 3. BOUTON ACTION --- #}
+                <div class="card-actions justify-end mt-auto">
+                    <a href="{{ path('app_prestation_show', {slug: prestation.slug}) }}" class="btn btn-sm btn-primary group">
+                        En savoir plus 
+                        <span class="group-hover:translate-x-1 transition-transform">→</span>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-{% else %}
-    {# S'il n'y a pas encore de services #}
-    <div class="col-span-3 text-center py-10">
-        <div class="text-5xl mb-4">👻</div>
-        <p class="text-lg text-base-content/60">Aucun service disponible pour le moment.</p>
-    </div>
-{% endfor %}
+    {% else %}
+        {# Cas où il n'y a pas de services #}
+        <div class="col-span-3 text-center py-10">
+            <div class="text-5xl mb-4">👻</div>
+            <p class="text-lg text-base-content/60">Aucun service disponible pour le moment.</p>
+        </div>
+    {% endfor %}
+
+</div>
 
             </div>
         </div>

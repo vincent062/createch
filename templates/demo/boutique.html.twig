@@ -35,9 +35,9 @@
     </nav>
 
     <header class="relative h-[70vh] flex items-center justify-center">
-        <img src="{{ asset('img/Gemini_Generated_Image_caf6x3caf6x3caf6.png') }}" 
-             class="absolute inset-0 w-full h-full object-cover" 
-             alt="Ambiance Boutique">
+        <img src="{{ asset('/img/bougie.png') }}" 
+            class="absolute inset-0 w-full h-full object-cover" 
+            alt="Ambiance Boutique">
         
         <div class="relative z-10 bg-white/90 backdrop-blur-sm p-12 text-center max-w-lg shadow-xl">
             <h1 class="text-4xl font-light mb-4">L'Élégance Naturelle</h1>
@@ -54,7 +54,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div class="group cursor-pointer">
                 <div class="h-96 bg-gray-200 overflow-hidden relative mb-4">
-                    <img src="https://images.unsplash.com/photo-1608571423902-eed4a5e84e43?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Bougie">
+                    <img src="{{ asset('/img/bougie.png') }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Bougie">
                     <div class="absolute bottom-4 right-4 bg-white p-2 rounded-full shadow hover:bg-sage hover:text-white transition">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
                     </div>
@@ -66,7 +66,7 @@
 
             <div class="group cursor-pointer">
                 <div class="h-96 bg-gray-200 overflow-hidden relative mb-4">
-                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdd403cc2?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Crème">
+                    <img src="{{ asset('/img/creme.png') }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Crème">
                     <div class="absolute top-4 left-4 bg-sage text-white text-xs px-2 py-1 uppercase">Best Seller</div>
                 </div>
                 <h3 class="text-lg font-medium">Crème Mains Karité</h3>
@@ -76,10 +76,10 @@
 
             <div class="group cursor-pointer">
                 <div class="h-96 bg-gray-200 overflow-hidden relative mb-4">
-                    <img src="https://images.unsplash.com/photo-1616401784845-180882ba9ba8?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Linge">
+                    <img src="{{ asset('/img/spray.png') }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Linge">
                 </div>
-                <h3 class="text-lg font-medium">Brume d'Oreiller</h3>
-                <p class="text-gray-500 text-sm">Lavande & Camomille</p>
+                <h3 class="text-lg font-medium">Brume pour le linge</h3>
+                <p class="text-gray-500 text-sm">Fleur de coton & Musc Blanc</p>
                 <p class="mt-2 font-bold text-sage">29.00 €</p>
             </div>
         </div>

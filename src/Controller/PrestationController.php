@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 
 class PrestationController extends AbstractController
 {
-    // 1. C'est cette partie qui manquait : La liste des services
+    // 1. liste des services
     #[Route('/services', name: 'app_prestation_index')]
     public function index(PrestationRepository $prestationRepository): Response
     {
@@ -20,7 +20,7 @@ class PrestationController extends AbstractController
         ]);
     }
 
-    // 2. La page de détail (que vous aviez déjà)
+    // 2. La page de détail 
     #[Route('/service/{slug}', name: 'app_prestation_show')]
     public function show(
         #[MapEntity(mapping: ['slug' => 'slug'])] Prestation $prestation
